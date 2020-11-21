@@ -16,6 +16,6 @@ Run `npm install` to download and install third party libraries.
 
 Run `npm deploy` to build and deploy the template to the gh-pages branch of icsdept-dashboard.
 
-In GitHub, go to the Settings page, and make sure that 
+In GitHub, go to the Settings page, and check the GitHub Pages section to see that "Source" is the root of the gh-pages branch. Do not specify a Jekyll theme.
 
 Your template dashboard should now be available (in this example) at https://icsdept.github.io/icsdept-dashboard.

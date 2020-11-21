@@ -1,8 +1,8 @@
 {
-  "name": "react-app-ts",
-  "version": "0.1.0",
-  "private": true,
+  "name": "uh-dept-dashboard-template",
   "homepage": "https://uh-dept-dashboard.github.io/uh-dept-dashboard-template",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -17,19 +17,19 @@
     "typescript": "^4.0.5",
     "web-vitals": "^0.2.4"
   },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^7.14.0",
+    "gh-pages": "^3.1.0"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts start",
     "build": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts build",
     "test": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts test",
-    "eject": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "eslint src/ --ext .ts --ext .tsx"
   },
   "browserslist": {
     "production": [
@@ -43,7 +43,10 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "gh-pages": "^3.1.0"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   }
 }
