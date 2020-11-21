@@ -2,8 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  console.log('foo');
+const App: React.FunctionComponent = () => {
   return (
     <div className="App">
       <header className="App-header">
