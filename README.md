@@ -26,7 +26,7 @@ Edit the .github/workflows/deploy.yml file.
 
 Run `npm install` to download and install third party libraries.
 
-Run `npm deploy` to build and deploy the template to the gh-pages branch of icsdept-dashboard.
+Run `npm deploy` to build and deploy the template to the gh-pages branch of this repo.
 
 In GitHub, go to the Settings page, and check the GitHub Pages section to see that "Source" is the root of the gh-pages branch. Do not specify a Jekyll theme.
 

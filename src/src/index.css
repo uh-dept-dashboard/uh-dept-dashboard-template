@@ -1,13 +1,22 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Custom site-wide CSS */
+
+.uh-green {
+  color:  #376551;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.landing-green-background {
+  background-color: #376551;
+  color: white;
+  padding-top: 20px;
+}
+
+.landing-white-background {
+  background-color: white;
+  color: #376551;
+  padding-top: 20px;
+}
+
+.reset-margins {
+  margin-top: 0;
+  margin-bottom: 0;
 }
