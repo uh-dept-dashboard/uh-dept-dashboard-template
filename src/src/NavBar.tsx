@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Menu, Image} from 'semantic-ui-react';
 import uhLogo from './images/uh-logo.png';
 
@@ -15,10 +14,5 @@ const NavBar: React.FunctionComponent = () => {
     </Menu>
   );
 }
-
-/** Declare the types of all properties. */
-NavBar.propTypes = {
-  currentUser: PropTypes.string,
-};
 
 export default NavBar;
