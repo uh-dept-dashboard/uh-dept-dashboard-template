@@ -30,5 +30,8 @@ jobs:
           node-version: '12.x'
 
       - run: npm ci
+      - run: git config --global user.email "johnson@hawaii.edu"
+      - run: git config --global user.name "Philip Johnson"
+      - run: git remote set-url origin https://uh-dept-dashboard:${{ secrets.GITHUB_TOKEN }}@github.com/uh-dept-dashboard/uh-dept-dashboard-template.git
       - run: npm run deploy
 
