@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
+import './AYMeasureCards.css';
 
 interface AcademicYearMeasureProps {
   name: string,
@@ -7,7 +8,7 @@ interface AcademicYearMeasureProps {
   year: number
 }
 
-const AcademicYearMeasure: React.FunctionComponent<AcademicYearMeasureProps> = ({name, description, year}) => {
+const AYMeasureCard: React.FunctionComponent<AcademicYearMeasureProps> = ({name, description, year}) => {
   return (
     <Card>
       <Card.Content>
@@ -20,4 +21,4 @@ const AcademicYearMeasure: React.FunctionComponent<AcademicYearMeasureProps> = (
 }
 
 
-export default AcademicYearMeasure;
+export default AYMeasureCard;

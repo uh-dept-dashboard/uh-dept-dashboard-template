@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container} from 'semantic-ui-react';
-import TabbedAYContainer from "./TabbedAYContainer";
+import AYTabbedContainer from "./AYTabbedContainer";
 
 type LandingPageProps = {
   latestAcademicYear: number
@@ -11,7 +11,7 @@ const LandingPage: React.FunctionComponent<LandingPageProps> = ({latestAcademicY
 
   return (
     <Container fluid style={{paddingLeft: '10px', paddingRight: '10px'}}>
-      <TabbedAYContainer years={years}/>
+      <AYTabbedContainer years={years}/>
     </Container>
   );
 }

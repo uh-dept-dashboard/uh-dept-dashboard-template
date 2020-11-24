@@ -1,18 +1,16 @@
-// YourComponent.stories.tsx
-
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import AcademicYearMeasure from '../pages/landing/AcademicYearMeasure';
+import AYMeasureCard from '../pages/landing/AYMeasureCard';
 
 // This default export determines where your story goes in the story list
 export default {
-  title: 'Academic Year Measure',
-  component: AcademicYearMeasure,
+  title: 'AY Measure Card',
+  component: AYMeasureCard,
 };
 
-const Template: Story<ComponentProps<typeof AcademicYearMeasure>> = (args) => (
-  <AcademicYearMeasure {...args} />
+const Template: Story<ComponentProps<typeof AYMeasureCard>> = (args) => (
+  <AYMeasureCard {...args} />
 );
 
 export const SSH = Template.bind({});

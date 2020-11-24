@@ -1,14 +1,14 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
-import './AcademicYear.css';
-import AcademicYearMeasure from "./AcademicYearMeasure";
+import './AYMeasureCards.css';
+import AYMeasureCard from "./AYMeasureCard";
 
-interface AcademicYearProps {
+interface AYMeasureCardsProps {
   year: number
 }
 
 /** Displays a set of Cards, each containing an AcademicYearMeasure. */
-const AcademicYear: React.FunctionComponent<AcademicYearProps> = ({ year }) => {
+const AYMeasureCards: React.FunctionComponent<AYMeasureCardsProps> = ({ year }) => {
   const cardInfo = [
     { name: 'SSH', description: 'Student Semester Hours is a measure of the study body provided instruction'},
     { name: 'Faculty FTE', description: 'Faculty FTE measures the number of faculty available for teaching, research and service'},
@@ -21,9 +21,9 @@ const AcademicYear: React.FunctionComponent<AcademicYearProps> = ({ year }) => {
 
   return (
     <Card.Group centered>
-      {cardInfo.map((info, index) => <AcademicYearMeasure key={index} name={info.name} description={info.description} year={year}/>)}
+      {cardInfo.map((info, index) => <AYMeasureCard key={index} name={info.name} description={info.description} year={year}/>)}
     </Card.Group>
   );
 }
 
-export default AcademicYear;
+export default AYMeasureCards;
