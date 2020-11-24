@@ -2,13 +2,18 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import './AYMeasureCards.css';
 
-interface AcademicYearMeasureProps {
+interface AYMeasureCardProps {
   name: string,
   description: string,
-  year: number
+  year: number,
+  value: number,
+  priorDelta?: number,
+  nextDelta?: number,
+  sparks?: Array<Record<string, unknown>>
+
 }
 
-const AYMeasureCard: React.FunctionComponent<AcademicYearMeasureProps> = ({name, description, year}) => {
+const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year}) => {
   return (
     <Card>
       <Card.Content>
