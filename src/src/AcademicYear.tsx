@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import './AcademicYear.css';
 
-type AYMeasureProps = {
+interface AYMeasureProps {
   name: string,
   description: string,
   year: number
