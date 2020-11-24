@@ -21,6 +21,12 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.1.5",
+    "@storybook/addon-essentials": "^6.1.5",
+    "@storybook/addon-links": "^6.1.5",
+    "@storybook/node-logger": "^6.1.5",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.5",
     "@types/react-helmet": "^6.1.0",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
@@ -33,7 +39,9 @@
     "start": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts start",
     "build": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts build",
     "test": "env DISABLE_NEW_JSX_TRANSFORM=true react-scripts test",
-    "lint": "eslint src/ --ext .ts --ext .tsx"
+    "lint": "eslint src/ --ext .ts --ext .tsx",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
