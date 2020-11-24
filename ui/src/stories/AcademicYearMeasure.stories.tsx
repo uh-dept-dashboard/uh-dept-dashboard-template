@@ -3,7 +3,7 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import AcademicYearMeasure from '../AcademicYearMeasure';
+import AcademicYearMeasure from '../pages/landing/AcademicYearMeasure';
 
 // This default export determines where your story goes in the story list
 export default {

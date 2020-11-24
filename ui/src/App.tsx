@@ -2,15 +2,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import './App.css';
 import NavBar from "./NavBar";
-import { Container } from 'semantic-ui-react';
-import TabbedAYContainer from "./TabbedAYContainer";
+import LandingPage from './pages/landing/LandingPage';
 
 type AppProps = {
   latestAcademicYear: number
 }
 
 const App: React.FunctionComponent<AppProps> = ({latestAcademicYear}) => {
-  const years = [latestAcademicYear, latestAcademicYear - 1, latestAcademicYear - 2, latestAcademicYear - 3, latestAcademicYear - 4];
 
   return (
     <div>
@@ -18,9 +16,7 @@ const App: React.FunctionComponent<AppProps> = ({latestAcademicYear}) => {
         <title>UH Dept Dashboard Template</title>
       </Helmet>
       <NavBar/>
-      <Container fluid style={{paddingLeft: '10px', paddingRight: '10px'}}>
-        <TabbedAYContainer years={years}/>
-      </Container>
+      <LandingPage latestAcademicYear={latestAcademicYear}/>
     </div>
   );
 }

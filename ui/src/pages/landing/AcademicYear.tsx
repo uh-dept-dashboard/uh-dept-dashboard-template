@@ -3,7 +3,6 @@ import { Card } from 'semantic-ui-react';
 import './AcademicYear.css';
 import AcademicYearMeasure from "./AcademicYearMeasure";
 
-
 interface AcademicYearProps {
   year: number
 }

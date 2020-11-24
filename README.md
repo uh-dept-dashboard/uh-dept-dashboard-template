@@ -2,7 +2,26 @@
 
 This repo contains template code for creating University of Hawaii Department Dashboards.
 
-## Creating a new dashboard from this template
+## Developer Guide: Coding the Template
+
+### Installation
+
+  * `cd ui/`
+  * `npm install`
+
+### Run the system
+
+  * `npm start`: brings up system at localhost:3000/uh-dept-dashboard-template
+  * `npm run storybook`: brings up the storybook interface at localhost:6006.
+
+
+### Deployment
+
+  * `npm run deploy`: manually initiates a deployment to https://uh-dept-dashboard.github.io/uh-dept-dashboard-template
+  * Each commit to the main branch will initiate a GitHub action to deploy
+
+
+## Dashboard Administrator Guide: Creating a new dashboard from this template
 
 ### Create your new repo
 
@@ -22,7 +41,7 @@ Edit the .github/workflows/deploy.yml file.
   * On lines 33 and 34, edit the user.email and user.name fields to be a person with commit privileges to this repo.
   * One line 35, change "uh-dept-dashboard" to your new organization (for example, icsdept) two times, and change uh-dept-dashboard-template to your new repo (for example, icsdept-dashboard).
 
-## Initial build and deploy
+### Initial build and deploy
 
 Run `npm install` to download and install third party libraries.
 
@@ -32,6 +51,6 @@ In GitHub, go to the Settings page, and check the GitHub Pages section to see th
 
 Go to (for this example) https://icsdept.github.io/icsdept-dashboard and see if the template dashboard appears.
 
-## Automated deployment
+### Automated deployment
 
 By editing the .github/workflows/deploy.yml file, you have configured automated deployment. This means that each time you commit changes to the main branch, GitHub will automatically rebuild and redeploy your system.
