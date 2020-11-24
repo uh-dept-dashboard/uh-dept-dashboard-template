@@ -15,8 +15,8 @@ const Template: Story<ComponentProps<typeof AcademicYearMeasure>> = (args) => (
   <AcademicYearMeasure {...args} />
 );
 
-export const FirstStory = Template.bind({});
-FirstStory.args = {
+export const SSH = Template.bind({});
+SSH.args = {
   name: 'SSH',
   description: 'Student Semester Hours is a measure of the study body provided instruction',
   year: 2010
