@@ -54,3 +54,15 @@ Go to (for this example) https://icsdept.github.io/icsdept-dashboard and see if 
 ### Automated deployment
 
 By editing the .github/workflows/deploy.yml file, you have configured automated deployment. This means that each time you commit changes to the main branch, GitHub will automatically rebuild and redeploy your system.
+
+## About the "sparks" parameter to AYMeasureCard
+
+Sparks is an array of objects, each of which defines a spark chart, which are laid out in the card in the order provided in the array. The fields for each object are as follows:
+
+| Field | Meaning | Example |
+| ----- | ------- | ------- |
+| chart | The type of chart | See the enum ChartType. |
+| title | The title to associated with the chart | "Five Year Trend" |
+| data  | Array of objects containing data values | Exact structure is type dependent. Required field "value" |
+
+

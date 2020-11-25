@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import { Units } from '../../Theme';
+import LineSpark from '../../components/spark/LineSpark';
 
 interface AYMeasureCardProps {
   name: string,
@@ -10,7 +11,8 @@ interface AYMeasureCardProps {
   value: number,
   priorDelta?: number,
   nextDelta?: number,
-  sparks?: Array<Record<string, unknown>>,
+  // eslint-disable-next-line
+  sparks?: Array<any>,
   unit?: Units
 }
 
@@ -27,7 +29,7 @@ const formatNumber = (num: number) => {
   return `${(num / 1000000).toPrecision(3)}M`;
 }
 
-const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value, priorDelta, nextDelta, unit}) => {
+const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value, priorDelta, nextDelta, unit, sparks}) => {
   let formattedValue = formatNumber(value);
   if (unit)
     if (unit === Units.Percent) {
@@ -60,8 +62,12 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
           </Grid.Column>
         </Grid>
         <Card.Description>{description}</Card.Description>
-        <Card.Meta>{`${year}`}</Card.Meta>
+        { sparks ? sparks.map((data, index) => <div key={index} style={{paddingTop: '10px'}}>
+          <Card.Description textAlign='center'>{data.title}</Card.Description>
+          <LineSpark data={data} />
+        </div>) : ''}
       </Card.Content>
+
     </Card>
   )
 }

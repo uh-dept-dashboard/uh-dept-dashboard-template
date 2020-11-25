@@ -2,6 +2,8 @@
 
 class Theme {
   color: Record<string, string>;
+  chartWidth: number;
+  chartHeight: number;
   constructor() {
     this.color = {};
     this.color.green = '#376551';
@@ -9,6 +11,8 @@ class Theme {
     this.color.lightGreen = '#4DE8A5';
     this.color.red = '#E84F35';
     this.color.yellow = '#E8D541';
+    this.chartWidth = 325;
+    this.chartHeight = 100;
   }
 }
 
@@ -19,4 +23,8 @@ enum Units {
   Percent = '%'
 }
 
-export { theme, Units };
+enum ChartType {
+  LineSpark = 'LineSpark',
+}
+
+export { theme, Units, ChartType };
