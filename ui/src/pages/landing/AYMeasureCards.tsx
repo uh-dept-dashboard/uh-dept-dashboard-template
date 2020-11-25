@@ -42,7 +42,7 @@ const AYMeasureCards: React.FunctionComponent<AYMeasureCardsProps> = ({ year }) 
     },
     {
       name: 'Graduation Rate',
-      value: 68,
+      value: 168,
       description: 'Graduation rate measures the number of students receiving a degree.'
     },
   ]

@@ -2,11 +2,16 @@
   border: 1px solid #376551 !important;
 }
 
+/* 375px is chosen because it allows four cards per row for a MacOS 15" laptop screen width. */
 .ui.cards>.card {
-  width: 400px;
+  width: 375px;
 }
 
 /* Just for storybook. */
 .ui.card {
-  width: 400px;
+  width: 375px;
+}
+
+.ui.statistic>.label~.value, .ui.statistics .statistic>.label~.value  {
+  color: #376551;
 }
