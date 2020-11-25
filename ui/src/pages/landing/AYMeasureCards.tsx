@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import AYMeasureCard from "./AYMeasureCard";
+import { Units } from '../../Theme';
 
 interface AYMeasureCardsProps {
   year: number
@@ -30,14 +31,16 @@ const AYMeasureCards: React.FunctionComponent<AYMeasureCardsProps> = ({ year }) 
       value: 2450346,
       description: 'Extramural funding measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole)',
       priorDelta: makeDelta(),
-      nextDelta: makeDelta()
+      nextDelta: makeDelta(),
+      unit: Units.Dollars
     },
     {
       name: 'Retention',
       value: 34,
       description: 'Retention measures the percentage of students entering the academic program who receive a degree in it.',
       priorDelta: makeDelta(),
-      nextDelta: makeDelta()
+      nextDelta: makeDelta(),
+      unit: Units.Percent
     },
     {
       name: 'Publications',
@@ -54,9 +57,9 @@ const AYMeasureCards: React.FunctionComponent<AYMeasureCardsProps> = ({ year }) 
       nextDelta: makeDelta()
     },
     {
-      name: 'Graduation Rate',
+      name: 'Graduates',
       value: 168,
-      description: 'Graduation rate measures the number of students receiving a degree.',
+      description: 'Graduates measures the number of students receiving a degree.',
       priorDelta: makeDelta(),
       nextDelta: makeDelta()
     },

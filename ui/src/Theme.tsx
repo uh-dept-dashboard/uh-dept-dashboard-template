@@ -14,4 +14,9 @@ class Theme {
 
 const theme = new Theme();
 
-export { theme };
+enum Units {
+  Dollars = '$',
+  Percent = '%'
+}
+
+export { theme, Units };
