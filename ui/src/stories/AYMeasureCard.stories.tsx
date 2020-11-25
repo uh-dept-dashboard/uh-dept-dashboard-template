@@ -18,5 +18,7 @@ SSH.args = {
   name: 'SSH',
   description: 'Student Semester Hours is a measure of the study body provided instruction',
   value: 23456,
-  year: 2010
+  year: 2018,
+  priorDelta: 37,
+  nextDelta: -21
 };

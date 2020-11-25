@@ -26,13 +26,13 @@ const formatNumber = (num: number) => {
   return `${(num / 1000000).toPrecision(3)}M`;
 }
 
-const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value}) => {
+const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value, priorDelta, nextDelta}) => {
   return (
     <Card raised={true}>
       <Card.Content>
         <Grid>
             <Grid.Column width={4} verticalAlign="middle" textAlign="right" style={{paddingLeft: '0px', paddingRight: '35px'}}>
-              <Icon name="arrow left"/>+37% 2018
+              {(year > 2015) ? (<div> <Icon name="arrow left"/> {priorDelta}% {year - 1} </div>): ''}
             </Grid.Column>
             <Grid.Column width={8}>
               <div className="measureHeader" style={{textAlign: 'center'}}>
@@ -43,7 +43,7 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
               </div>
             </Grid.Column>
             <Grid.Column width={4} verticalAlign="middle" textAlign="left" style={{paddingLeft: '35px', paddingRight: '0px'}}>
-              -24% <Icon name="arrow right"/> 2020
+              {(year < 2019) ? (<div> {nextDelta}% <Icon name="arrow right"/> {year + 1} </div>): ''}
             </Grid.Column>
         </Grid>
         <Card.Description>{description}</Card.Description>

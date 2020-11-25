@@ -7,7 +7,7 @@ type LandingPageProps = {
 }
 
 const LandingPage: React.FunctionComponent<LandingPageProps> = ({latestAcademicYear}) => {
-  const years = [latestAcademicYear, latestAcademicYear - 1, latestAcademicYear - 2, latestAcademicYear - 3, latestAcademicYear - 4];
+  const years = [latestAcademicYear - 4, latestAcademicYear - 3, latestAcademicYear - 2, latestAcademicYear - 1, latestAcademicYear ];
 
   return (
     <Container fluid style={{paddingLeft: '10px', paddingRight: '10px'}}>

@@ -12,7 +12,7 @@ const AYTabbedContainer: React.FunctionComponent<AYTabbedContainerProps> = ({ ye
   const panes = years.map(year => { return { menuItem: `${year}`, render: () => <Tab.Pane><AYMeasureCards year={year}/></Tab.Pane>} })
 
   return (
-    <Tab panes={panes}/>
+    <Tab panes={panes} defaultActiveIndex={4}/>
   );
 }
 
