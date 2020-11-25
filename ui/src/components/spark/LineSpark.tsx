@@ -3,6 +3,7 @@ import { LineChart, Line } from 'recharts';
 import { theme } from '../../Theme';
 
 interface LineSparkProps  {
+  // eslint-disable-next-line
   data: Record<string, any>
 }
 

@@ -5,17 +5,17 @@ import NavBar from "./NavBar";
 import LandingPage from './pages/landing/LandingPage';
 
 type AppProps = {
-  latestAcademicYear: number
+  latestAcademicYear: number,
+  title: string
 }
 
-const App: React.FunctionComponent<AppProps> = ({latestAcademicYear}) => {
-
+const App: React.FunctionComponent<AppProps> = ({title, latestAcademicYear}) => {
   return (
     <div>
       <Helmet>
-        <title>UH Dept Dashboard Template</title>
+        <title>{title}</title>
       </Helmet>
-      <NavBar/>
+      <NavBar title={title}/>
       <LandingPage latestAcademicYear={latestAcademicYear}/>
     </div>
   );
