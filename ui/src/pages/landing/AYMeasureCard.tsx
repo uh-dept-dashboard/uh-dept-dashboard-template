@@ -48,7 +48,7 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
                        style={{paddingLeft: '0px', paddingRight: '35px'}}>
             {(year > 2015) ? (<div><Icon name="arrow left"/> {formattedPriorDelta}% {year - 1} </div>) : ''}
           </Grid.Column>
-          <Grid.Column width={8}>
+          <Grid.Column style={{paddingLeft: 0, paddingRight: 0}} width={8}>
             <div className="measureHeader" style={{textAlign: 'center'}}>
               <Statistic>
                 <Statistic.Label>{name}</Statistic.Label>
@@ -61,7 +61,7 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
             {(year < 2019) ? (<div> {formattedNextDelta}% <Icon name="arrow right"/> {year + 1} </div>) : ''}
           </Grid.Column>
         </Grid>
-        <Card.Description>{description}</Card.Description>
+        <Card.Description style={{paddingTop: '10px'}}>{description}</Card.Description>
         { sparks ? sparks.map((data, index) => <div key={index} style={{paddingTop: '10px'}}>
           <Card.Description textAlign='center'>{data.title}</Card.Description>
           <LineSpark data={data} />

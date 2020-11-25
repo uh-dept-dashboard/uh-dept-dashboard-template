@@ -8,8 +8,6 @@ interface LineSparkProps  {
 }
 
 const LineSpark: React.FunctionComponent<LineSparkProps> = ({ data }) => {
-  // eslint-disable-next-line no-console
-  console.log(data.data);
   return (
     <LineChart width={theme.chartWidth} height={theme.chartHeight} data={data.data}>
       <Line type='monotone' dataKey='value' stroke={theme.color.green} strokeWidth={2} />
