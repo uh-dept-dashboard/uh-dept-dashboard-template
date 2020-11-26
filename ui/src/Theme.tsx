@@ -25,6 +25,7 @@ enum Units {
 
 enum ChartType {
   LineSpark = 'LineSpark',
+  BarSpark = 'BarSpark'
 }
 
 export { theme, Units, ChartType };

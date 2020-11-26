@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import {ChartType, Units} from '../../Theme';
-import LineSpark from '../../components/spark/LineSpark';
+import { LineSpark, BarSpark } from '../../components/spark/SparkCharts';
 
 interface SparkDataObject {
   value: number
@@ -22,7 +22,6 @@ interface AYMeasureCardProps {
   value: number,
   priorDelta?: number,
   nextDelta?: number,
-  // eslint-disable-next-line
   sparks?: Array<SparkDataSet>,
   unit?: Units
 }
@@ -75,7 +74,8 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
         <Card.Description style={{paddingTop: '10px'}}>{description}</Card.Description>
         { sparks ? sparks.map((data, index) => <div key={index} style={{paddingTop: '10px'}}>
           <Card.Description textAlign='center'>{data.title}</Card.Description>
-          <LineSpark data={data} />
+          { (data.chartType === ChartType.LineSpark) ? <LineSpark data={data} /> : ''}
+          { (data.chartType === ChartType.BarSpark) ? <BarSpark data={data} /> : ''}
         </div>) : ''}
       </Card.Content>
 

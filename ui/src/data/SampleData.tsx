@@ -14,6 +14,11 @@ const sampleSparks = () => [
     chartType: ChartType.LineSpark,
     title: 'Five Year Trend',
     data: makeSampleSparkData(),
+  },
+  {
+    chartType: ChartType.BarSpark,
+    title: 'Bar Chart',
+    data: makeSampleSparkData()
   }
 ];
 
@@ -33,7 +38,7 @@ function makeAYMeasureCardProps (name: string, year: number, description: string
 }
 
 function makeSSHCardProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('SSH', year, 'Student Semester Hours measures the amount of instruction.', 1000, 2000);
+  return makeAYMeasureCardProps('SSH', year, 'Student Semester Hours measures the amount of instruction.', 1500, 2000);
 }
 
 function makeFacultyFTEProps(year: number): AYMeasureCardProps {
