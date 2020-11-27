@@ -1,5 +1,5 @@
 import React from 'react';
-import {LineChart, Line, BarChart, Bar, PieChart, Pie} from 'recharts';
+import {LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis} from 'recharts';
 import { theme } from '../../Theme';
 
 interface SparkProps {
@@ -18,6 +18,15 @@ const BarSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <BarChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
       <Bar dataKey='value' fill={theme.color.green}  />
+    </BarChart>
+  )
+}
+
+const LabeledBarSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
+  return (
+    <BarChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
+      <Bar dataKey='value' fill={theme.color.green}  />
+      <XAxis dataKey='label'/>
     </BarChart>
   )
 }
@@ -42,4 +51,4 @@ const DemographicPieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
 }
 
 export type { SparkProps };
-export { LineSpark, BarSpark, PieSpark, DemographicPieSpark };
+export { LineSpark, BarSpark, PieSpark, DemographicPieSpark, LabeledBarSpark };

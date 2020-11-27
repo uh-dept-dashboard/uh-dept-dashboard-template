@@ -32,6 +32,14 @@ const makeDemographicPieData = () => {
   return data;
 }
 
+const makePublicationTierData = () => {
+  const data = [];
+  data.push({ value: Math.floor(Math.random() * 100), label: 'Tier 1'});
+  data.push({ value: Math.floor(Math.random() * 100), label: 'Tier 2'});
+  data.push({ value: Math.floor(Math.random() * 100), label: 'Other'});
+  return data;
+}
+
 const initializeSparks = () => [
   {
     chartType: ChartType.LineSpark,
@@ -83,7 +91,7 @@ function makeRetentionProps(year: number): AYMeasureCardProps {
 
 function makePublicationsProps(year: number): AYMeasureCardProps {
   const props = makeAYMeasureCardProps('Publications', year, 'Publications measures the number of published scholarly works.', 20, 40);
-  props.sparks.push({ chartType: ChartType.BarSpark, chartTitle: 'By Faculty', chartData: makeSortedData(15, 5)});
+  props.sparks.push({ chartType: ChartType.LabeledBarSpark, chartTitle: 'Publication Quality', chartData: makePublicationTierData()});
   return props;
 }
 

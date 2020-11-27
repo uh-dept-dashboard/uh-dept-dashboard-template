@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import {ChartType, Units} from '../../Theme';
-import {LineSpark, BarSpark, DemographicPieSpark} from '../../components/spark/SparkCharts';
+import {LineSpark, BarSpark, DemographicPieSpark, LabeledBarSpark} from '../../components/spark/SparkCharts';
 
 interface SparkDataSet {
   chartType: ChartType,
@@ -73,6 +73,7 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
           { (data.chartType === ChartType.LineSpark) ? <LineSpark data={data.chartData} /> : ''}
           { (data.chartType === ChartType.BarSpark) ? <BarSpark data={data.chartData} /> : ''}
           { (data.chartType === ChartType.DemographicPieSpark) ? <div style={{paddingTop: '10px'}}><DemographicPieSpark data={data.chartData} /></div> : ''}
+          { (data.chartType === ChartType.LabeledBarSpark) ? <div style={{paddingTop: '10px'}}><LabeledBarSpark data={data.chartData} /></div> : ''}
         </div>) : ''}
       </Card.Content>
 
