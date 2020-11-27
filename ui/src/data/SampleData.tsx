@@ -17,6 +17,21 @@ const makeSortedData = (num: number, range = 101) => {
   return data.sort(function(a, b){return a.value - b.value });
 }
 
+const makeDemographicPieData = () => {
+  const women = Math.floor(Math.random() * 20) + 3;
+  const men = 100 - women;
+  const data = [];
+  data.push({ value: women, label: 'Women'});
+  data.push({ value: men, label: 'Men'});
+  const caucasian = 50 + Math.floor(Math.random() * 20);
+  const nativeHawaiian = Math.floor(Math.random() * 10);
+  const other = 100 - caucasian - nativeHawaiian;
+  data.push({ value: caucasian, label: 'Caucasian'});
+  data.push({ value: nativeHawaiian, label: 'Native Hawaiian'});
+  data.push({ value: other, label: 'Other'});
+  return data;
+}
+
 const initializeSparks = () => [
   {
     chartType: ChartType.LineSpark,
@@ -47,7 +62,9 @@ function makeSSHCardProps(year: number): AYMeasureCardProps {
 }
 
 function makeFacultyFTEProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('Faculty FTE', year, 'Faculty FTE measures the number of faculty available for teaching, research and service.', 15, 20);
+  const props = makeAYMeasureCardProps('Faculty FTE', year, 'Faculty FTE measures the number of faculty available for teaching, research and service.', 15, 20);
+  props.sparks.push({ chartType: ChartType.DemographicPieSpark, chartTitle: 'By Gender, Ethnicity', chartData: makeDemographicPieData()});
+  return props;
 }
 
 function makeExtramuralFundingProps(year: number): AYMeasureCardProps {
@@ -60,6 +77,7 @@ function makeExtramuralFundingProps(year: number): AYMeasureCardProps {
 function makeRetentionProps(year: number): AYMeasureCardProps {
   const props = makeAYMeasureCardProps('Retention', year, 'Retention measures the percentage of students entering the academic program who receive a degree in it.', 20, 40);
   props.unit = Units.Percent;
+  props.sparks.push({ chartType: ChartType.DemographicPieSpark, chartTitle: 'By Gender, Ethnicity', chartData: makeDemographicPieData()});
   return props;
 }
 
@@ -76,7 +94,9 @@ function makeGraduateStudentSupportFTEProps(year: number): AYMeasureCardProps {
 }
 
 function makeGraduatesProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('Graduates', year, 'Graduates measures the number of students receiving a degree.', 120, 150);
+  const props = makeAYMeasureCardProps('Graduates', year, 'Graduates measures the number of students receiving a degree.', 120, 150);
+  props.sparks.push({ chartType: ChartType.DemographicPieSpark, chartTitle: 'By Gender, Ethnicity', chartData: makeDemographicPieData()});
+  return props;
 }
 
 export { makeSSHCardProps, makeFacultyFTEProps,makeExtramuralFundingProps, makeRetentionProps, makePublicationsProps, makeGraduateStudentSupportFTEProps, makeGraduatesProps };

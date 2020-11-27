@@ -25,7 +25,9 @@ enum Units {
 
 enum ChartType {
   LineSpark = 'LineSpark',
-  BarSpark = 'BarSpark'
+  BarSpark = 'BarSpark',
+  PieSpark = 'PieSpark',
+  DemographicPieSpark = 'DemographicPieSpark'
 }
 
 export { theme, Units, ChartType };

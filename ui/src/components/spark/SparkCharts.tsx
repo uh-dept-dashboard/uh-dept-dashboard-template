@@ -3,7 +3,7 @@ import {LineChart, Line, BarChart, Bar, PieChart, Pie} from 'recharts';
 import { theme } from '../../Theme';
 
 interface SparkProps {
-  data: { value: number }[]
+  data: { value: number, label?: string }[]
 }
 
 const LineSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
@@ -25,10 +25,21 @@ const BarSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
 const PieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <PieChart width={theme.chartWidth} height={theme.chartHeight} >
-      <Pie data={data} dataKey='value' fill={theme.color.green} isAnimationActive={false} cx="50%" cy="50%" outerRadius={80} label/>
+      <Pie data={data} dataKey='value' fill={theme.color.green} isAnimationActive={false} cx={theme.chartWidth/2} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} label/>
+    </PieChart>
+  )
+}
+
+const DemographicPieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
+  const data1 = data.slice(0,2);
+  const data2 = data.slice(2, data.length);
+  return (
+    <PieChart width={theme.chartWidth} height={theme.chartHeight} >
+      <Pie data={data1} dataKey='value' label={(entry) => entry.label} fill={theme.color.green} isAnimationActive={false} cx={theme.chartWidth/4} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} />
+      <Pie data={data2} dataKey='value' fill={theme.color.green} isAnimationActive={false} cx={(theme.chartWidth * 4)/5} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} label={(entry) => entry.label}/>
     </PieChart>
   )
 }
 
 export type { SparkProps };
-export { LineSpark, BarSpark, PieSpark };
+export { LineSpark, BarSpark, PieSpark, DemographicPieSpark };
