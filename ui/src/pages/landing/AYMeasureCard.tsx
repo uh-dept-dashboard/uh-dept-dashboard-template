@@ -22,7 +22,7 @@ interface AYMeasureCardProps {
   value: number,
   priorDelta?: number,
   nextDelta?: number,
-  sparks?: Array<SparkDataSet>,
+  sparks: Array<SparkDataSet>,
   unit?: Units
 }
 

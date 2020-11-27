@@ -1,24 +1,27 @@
-import { ChartType } from "../Theme";
+import {ChartType, Units} from "../Theme";
 import { AYMeasureCardProps } from "../pages/landing/AYMeasureCard";
 
-const makeSampleSparkData = () => {
+const makeRandomData = (num: number, range = 101) => {
   const data = [];
-  for (let i = 0; i < 5; i++) {
-    data.push({ value: Math.floor(Math.random() * 101) });
+  for (let i = 0; i < num; i++) {
+    data.push({ value: Math.floor(Math.random() * range) });
   }
   return data;
 }
 
-const sampleSparks = () => [
+const makeSortedData = (num: number, range = 101) => {
+  const data = [];
+  for (let i = 0; i < num; i++) {
+    data.push({ value: Math.floor(Math.random() * range) });
+  }
+  return data.sort(function(a, b){return a.value - b.value });
+}
+
+const initializeSparks = () => [
   {
     chartType: ChartType.LineSpark,
     title: 'Five Year Trend',
-    data: makeSampleSparkData(),
-  },
-  {
-    chartType: ChartType.BarSpark,
-    title: 'Bar Chart',
-    data: makeSampleSparkData()
+    data: makeRandomData(5),
   }
 ];
 
@@ -33,12 +36,14 @@ function makeAYMeasureCardProps (name: string, year: number, description: string
     year,
     priorDelta: makeDelta(),
     nextDelta: makeDelta(),
-    sparks: sampleSparks()
+    sparks: initializeSparks()
   }
 }
 
 function makeSSHCardProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('SSH', year, 'Student Semester Hours measures the amount of instruction.', 1500, 2000);
+  const props = makeAYMeasureCardProps('SSH', year, 'Student Semester Hours measures the amount of instruction.', 1500, 2000);
+  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15, 10)});
+  return props;
 }
 
 function makeFacultyFTEProps(year: number): AYMeasureCardProps {
@@ -46,19 +51,28 @@ function makeFacultyFTEProps(year: number): AYMeasureCardProps {
 }
 
 function makeExtramuralFundingProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('Extramural Funding', year, 'Extramural funding measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole.', 2000000, 3000000);
+  const props = makeAYMeasureCardProps('Extramural Funding', year, 'Extramural funding measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole.', 2000000, 3000000);
+  props.unit = Units.Dollars;
+  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15)});
+  return props;
 }
 
 function makeRetentionProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('Retention', year, 'Retention measures the percentage of students entering the academic program who receive a degree in it.', 20, 40);
+  const props = makeAYMeasureCardProps('Retention', year, 'Retention measures the percentage of students entering the academic program who receive a degree in it.', 20, 40);
+  props.unit = Units.Percent;
+  return props;
 }
 
 function makePublicationsProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('Publications', year, 'Publications measures the number of published scholarly works.', 20, 40);
+  const props = makeAYMeasureCardProps('Publications', year, 'Publications measures the number of published scholarly works.', 20, 40);
+  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15, 5)});
+  return props;
 }
 
 function makeGraduateStudentSupportFTEProps(year: number): AYMeasureCardProps {
-  return makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Graduate Student Support FTE measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 12, 14);
+  const props =  makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Graduate Student Support FTE measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 12, 14);
+  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15, 3)});
+  return props;
 }
 
 function makeGraduatesProps(year: number): AYMeasureCardProps {
