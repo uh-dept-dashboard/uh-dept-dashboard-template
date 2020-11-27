@@ -3,6 +3,7 @@ import { Card } from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import AYMeasureCard, {AYMeasureCardProps} from "./AYMeasureCard";
 import {
+  makeAdmissionsProps,
   makeExtramuralFundingProps,
   makeFacultyFTEProps,
   makeGraduatesProps,
@@ -26,7 +27,8 @@ function makeCardInfo(year: number) : AYMeasureCardProps[] {
     makePublicationsProps(year),
     makeGraduateStudentSupportFTEProps(year),
     makeGraduatesProps(year),
-    makeTDDProps(year)
+    makeTDDProps(year),
+    makeAdmissionsProps(year)
   ]
 }
 
