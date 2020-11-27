@@ -40,6 +40,16 @@ const makePublicationTierData = () => {
   return data;
 }
 
+const makeTimeToDegreeData = () => {
+  const data = [];
+  data.push({ value: 2, label: '< 6'});
+  data.push({ value: Math.floor(Math.random() * 10), label: '6-8'});
+  data.push({ value: Math.floor(Math.random() * 10), label: '8-10'});
+  data.push({ value: Math.floor(Math.random() * 10), label: '10-12'});
+  data.push({ value: 2, label: '12+'});
+  return data;
+}
+
 const initializeSparks = () => [
   {
     chartType: ChartType.LineSpark,
@@ -96,7 +106,8 @@ function makePublicationsProps(year: number): AYMeasureCardProps {
 }
 
 function makeGraduateStudentSupportFTEProps(year: number): AYMeasureCardProps {
-  const props =  makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Graduate Student Support FTE measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 12, 14);
+  const props =  makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Graduate Student Support FTE measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 120, 140);
+  props.value = props.value / 10;
   props.sparks.push({ chartType: ChartType.BarSpark, chartTitle: 'By Faculty', chartData: makeSortedData(15, 3)});
   return props;
 }
@@ -107,4 +118,11 @@ function makeGraduatesProps(year: number): AYMeasureCardProps {
   return props;
 }
 
-export { makeSSHCardProps, makeFacultyFTEProps,makeExtramuralFundingProps, makeRetentionProps, makePublicationsProps, makeGraduateStudentSupportFTEProps, makeGraduatesProps };
+function makeTDDProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Time To Degree', year, 'Time To Degree measures the number of semesters to obtain an undergraduate degree.', 80, 100);
+  props.value = props.value / 10;
+  props.sparks.push({ chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by Number of Semesters', chartData: makeTimeToDegreeData()});
+  return props;
+}
+
+export { makeSSHCardProps, makeFacultyFTEProps,makeExtramuralFundingProps, makeRetentionProps, makePublicationsProps, makeGraduateStudentSupportFTEProps, makeGraduatesProps, makeTDDProps };
