@@ -20,8 +20,8 @@ const makeSortedData = (num: number, range = 101) => {
 const initializeSparks = () => [
   {
     chartType: ChartType.LineSpark,
-    title: 'Five Year Trend',
-    data: makeRandomData(5),
+    chartTitle: 'Five Year Trend',
+    chartData: makeRandomData(5),
   }
 ];
 
@@ -42,7 +42,7 @@ function makeAYMeasureCardProps (name: string, year: number, description: string
 
 function makeSSHCardProps(year: number): AYMeasureCardProps {
   const props = makeAYMeasureCardProps('SSH', year, 'Student Semester Hours measures the amount of instruction.', 1500, 2000);
-  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15, 10)});
+  props.sparks.push({ chartType: ChartType.BarSpark, chartTitle: 'By Faculty', chartData: makeSortedData(15, 10)});
   return props;
 }
 
@@ -53,7 +53,7 @@ function makeFacultyFTEProps(year: number): AYMeasureCardProps {
 function makeExtramuralFundingProps(year: number): AYMeasureCardProps {
   const props = makeAYMeasureCardProps('Extramural Funding', year, 'Extramural funding measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole.', 2000000, 3000000);
   props.unit = Units.Dollars;
-  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15)});
+  props.sparks.push({ chartType: ChartType.BarSpark, chartTitle: 'By Faculty', chartData: makeSortedData(15)});
   return props;
 }
 
@@ -65,13 +65,13 @@ function makeRetentionProps(year: number): AYMeasureCardProps {
 
 function makePublicationsProps(year: number): AYMeasureCardProps {
   const props = makeAYMeasureCardProps('Publications', year, 'Publications measures the number of published scholarly works.', 20, 40);
-  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15, 5)});
+  props.sparks.push({ chartType: ChartType.BarSpark, chartTitle: 'By Faculty', chartData: makeSortedData(15, 5)});
   return props;
 }
 
 function makeGraduateStudentSupportFTEProps(year: number): AYMeasureCardProps {
   const props =  makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Graduate Student Support FTE measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 12, 14);
-  props.sparks.push({ chartType: ChartType.BarSpark, title: 'By Faculty', data: makeSortedData(15, 3)});
+  props.sparks.push({ chartType: ChartType.BarSpark, chartTitle: 'By Faculty', chartData: makeSortedData(15, 3)});
   return props;
 }
 

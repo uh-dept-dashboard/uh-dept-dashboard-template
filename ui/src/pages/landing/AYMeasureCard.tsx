@@ -2,16 +2,12 @@ import React from 'react';
 import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import {ChartType, Units} from '../../Theme';
-import { LineSpark, BarSpark } from '../../components/spark/SparkCharts';
-
-interface SparkDataObject {
-  value: number
-}
+import {LineSpark, BarSpark } from '../../components/spark/SparkCharts';
 
 interface SparkDataSet {
   chartType: ChartType,
-  title: string,
-  data: SparkDataObject[]
+  chartTitle: string,
+  chartData: { value: number }[]
 }
 
 
@@ -73,9 +69,9 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
         </Grid>
         <Card.Description style={{paddingTop: '10px'}}>{description}</Card.Description>
         { sparks ? sparks.map((data, index) => <div key={index} style={{paddingTop: '10px'}}>
-          <Card.Description textAlign='center'>{data.title}</Card.Description>
-          { (data.chartType === ChartType.LineSpark) ? <LineSpark data={data} /> : ''}
-          { (data.chartType === ChartType.BarSpark) ? <BarSpark data={data} /> : ''}
+          <Card.Description textAlign='center'>{data.chartTitle}</Card.Description>
+          { (data.chartType === ChartType.LineSpark) ? <LineSpark data={data.chartData} /> : ''}
+          { (data.chartType === ChartType.BarSpark) ? <BarSpark data={data.chartData} /> : ''}
         </div>) : ''}
       </Card.Content>
 
@@ -83,5 +79,5 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
   )
 }
 
-export type { SparkDataSet, SparkDataObject, AYMeasureCardProps };
+export type { SparkDataSet, AYMeasureCardProps };
 export default AYMeasureCard;
