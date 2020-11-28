@@ -4,14 +4,16 @@ import './AYMeasureCards.css';
 import AYMeasureCard, {AYMeasureCardProps} from "./AYMeasureCard";
 import {
   makeAdmissionsProps,
+  makeCourseEvaluationOneProps,
+  makeCourseEvaluationTwoProps, makeExitSurveyProps,
   makeExtramuralFundingProps,
   makeFacultyFTEProps,
   makeGraduatesProps,
-  makeGraduateStudentSupportFTEProps,
+  makeGraduateStudentSupportFTEProps, makeInternshipProps,
   makePublicationsProps,
   makeRetentionProps,
-  makeSSHCardProps,
-  makeTDDProps
+  makeSSHCardProps, makeStakeholderSurveyProps,
+  makeTDDProps, makeUndergraduateResearchExperienceProps
 } from "../../data/SampleData";
 
 interface AYMeasureCardsProps {
@@ -28,7 +30,13 @@ function makeCardInfo(year: number) : AYMeasureCardProps[] {
     makeGraduateStudentSupportFTEProps(year),
     makeGraduatesProps(year),
     makeTDDProps(year),
-    makeAdmissionsProps(year)
+    makeAdmissionsProps(year),
+    makeCourseEvaluationOneProps(year),
+    makeCourseEvaluationTwoProps(year),
+    makeExitSurveyProps(year),
+    makeStakeholderSurveyProps(year),
+    makeInternshipProps(year),
+    makeUndergraduateResearchExperienceProps(year)
   ]
 }
 

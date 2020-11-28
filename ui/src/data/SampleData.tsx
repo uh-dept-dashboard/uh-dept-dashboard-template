@@ -32,6 +32,28 @@ const makeDemographicPieBreakdown = () => {
   return { chartType: ChartType.DemographicPieSpark, chartTitle: 'Breakdown by gender, ethnicity', chartData: data}
 }
 
+const makeInternshipBreakdown = () => {
+  const data = [];
+  const hawaii = 50 + Math.floor(Math.random() * 20);
+  const mainland = Math.floor(Math.random() * 10);
+  const other = 100 - hawaii - mainland;
+  data.push({ value: hawaii, label: 'Hawaii'});
+  data.push({ value: mainland, label: 'Mainland'});
+  data.push({ value: other, label: 'Other'});
+  return { chartType: ChartType.PieSpark, chartTitle: 'Breakdown by location', chartData: data}
+}
+
+const makeUndergraduateResearchExperienceBreakdown = () => {
+  const data = [];
+  const urop = 50 + Math.floor(Math.random() * 20);
+  const faculty = Math.floor(Math.random() * 10);
+  const unfunded = 100 - urop - faculty;
+  data.push({ value: urop, label: 'UROP'});
+  data.push({ value: faculty, label: 'Faculty'});
+  data.push({ value: unfunded, label: 'Unfunded'});
+  return { chartType: ChartType.PieSpark, chartTitle: 'Breakdown by funding', chartData: data}
+}
+
 const makePublicationTierBreakdown = () => {
   const data = [];
   data.push({ value: Math.floor(Math.random() * 100), label: 'Tier 1'});
@@ -57,6 +79,34 @@ const makeAdmissionsBreakdown = () => {
   data.push({ value: Math.floor(Math.random() * 50), label: 'M.S.'});
   data.push({ value: Math.floor(Math.random() * 50), label: 'Ph.D.'});
   return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by degree program', chartData: data}
+}
+
+const makeCourseEvaluationBreakdown = () => {
+  const data = [];
+  data.push({ value: Math.floor(Math.random() * 100), label: 'Disagree'});
+  data.push({ value: Math.floor(Math.random() * 100), label: ''});
+  data.push({ value: Math.floor(Math.random() * 100), label: ''});
+  data.push({ value: Math.floor(Math.random() * 50), label: ''});
+  data.push({ value: Math.floor(Math.random() * 50), label: 'Agree'});
+  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by agreement', chartData: data}
+}
+
+const makeExitSurveyBreakdown = () => {
+  const data = [];
+  data.push({ value: Math.floor(Math.random() * 100), label: 'UH'});
+  data.push({ value: Math.floor(Math.random() * 80), label: 'Another school'});
+  data.push({ value: Math.floor(Math.random() * 50), label: 'No school'});
+  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by response', chartData: data}
+}
+
+const makeStakeholderSurveyBreakdown = () => {
+  const data = [];
+  data.push({ value: Math.floor(Math.random() * 50), label: 'Unsatisfied'});
+  data.push({ value: Math.floor(Math.random() * 100), label: ''});
+  data.push({ value: Math.floor(Math.random() * 100), label: ''});
+  data.push({ value: Math.floor(Math.random() * 50), label: ''});
+  data.push({ value: Math.floor(Math.random() * 50), label: 'Satisfied'});
+  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by satisfaction', chartData: data}
 }
 
 const makeFiveYearTrendBreakdown = () => {
@@ -144,4 +194,46 @@ function makeAdmissionsProps(year: number): AYMeasureCardProps {
   return props;
 }
 
-export { makeSSHCardProps, makeFacultyFTEProps,makeExtramuralFundingProps, makeRetentionProps, makePublicationsProps, makeGraduateStudentSupportFTEProps, makeGraduatesProps, makeTDDProps, makeAdmissionsProps};
+function makeCourseEvaluationOneProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Course Evaluation Response', year, 'Measures responses to: "As a professional student, I found this course attractive and compatible with my work life."', 30, 50);
+  props.value = props.value / 10;
+  props.sparks.push(makeCourseEvaluationBreakdown());
+  return props;
+}
+
+function makeCourseEvaluationTwoProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Course Evaluation Response', year, 'Measures responses to: "This course provided opportunities for me to improve my software development skills"', 30, 50);
+  props.value = props.value / 10;
+  props.sparks.push(makeCourseEvaluationBreakdown());
+  return props;
+}
+
+function makeExitSurveyProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Exit Survey Response', year, 'Measures responses to: "If you could start your higher education experience over, would you still attend this program?"', 50, 80);
+  props.unit = Units.Percent;
+  props.sparks.push(makeExitSurveyBreakdown());
+  return props;
+}
+
+function makeStakeholderSurveyProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Stakeholder Survey Response', year, 'Measures responses to: "I am satisfied with the quality of graduates from this program."', 10, 50);
+  props.value = props.value / 10;
+  props.sparks.push(makeStakeholderSurveyBreakdown());
+  return props;
+}
+
+function makeInternshipProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Internship', year, 'Measures percentage of this year\'s graduates who participated in an internship program.', 50, 90);
+  props.unit = Units.Percent;
+  props.sparks.push(makeInternshipBreakdown());
+  return props;
+}
+
+function makeUndergraduateResearchExperienceProps(year: number): AYMeasureCardProps {
+  const props = makeAYMeasureCardProps('Undergrad Research Experience', year, 'Measures percentage of this year\'s graduates who participated in an undergraduate research experience.', 50, 90);
+  props.unit = Units.Percent;
+  props.sparks.push(makeUndergraduateResearchExperienceBreakdown());
+  return props;
+}
+
+export { makeSSHCardProps, makeFacultyFTEProps,makeExtramuralFundingProps, makeRetentionProps, makePublicationsProps, makeGraduateStudentSupportFTEProps, makeGraduatesProps, makeTDDProps, makeAdmissionsProps, makeCourseEvaluationOneProps, makeCourseEvaluationTwoProps, makeExitSurveyProps, makeStakeholderSurveyProps, makeInternshipProps, makeUndergraduateResearchExperienceProps};

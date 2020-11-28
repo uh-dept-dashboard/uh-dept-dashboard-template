@@ -34,7 +34,7 @@ const LabeledBarSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
 const PieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <PieChart width={theme.chartWidth} height={theme.chartHeight} >
-      <Pie data={data} dataKey='value' fill={theme.color.green} isAnimationActive={false} cx={theme.chartWidth/2} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} label/>
+      <Pie data={data} dataKey='value' label={(entry) => entry.label} fill={theme.color.green} isAnimationActive={false} cx={theme.chartWidth/2} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} />
     </PieChart>
   )
 }
