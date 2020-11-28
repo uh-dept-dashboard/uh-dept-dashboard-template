@@ -4,60 +4,41 @@ import {AYMeasureCardProps} from "../pages/landing/AYMeasureCard";
 const endYear = 2019;
 const startYear = endYear - 4;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const measureType = {
-  SSH: 'SSH',
-  FACULTYFTE: 'FACULTYFTE',
-  EXTRAMURALFUNDING: 'EXTRAMURALFUNDING',
-  RETENTION: 'RETENTION',
-  PUBLICATIONS: 'PUBLICATIONS',
-  GRADUATESTUDENTSUPPORTFTE: 'GRADUATESTUDENTSUPPORTFTE',
-  GRADUATES: 'GRADUATES',
-  TIMETODEGREE: 'TIMETODEGREE',
-  ADMISSIONS: 'ADMISSIONS',
-  COURSEEVALUATIONRESPONSE: 'COURSEEVALUATIONRESPONSE',
-  EXITSURVEYRESPONSE: 'EXITSURVEYRESPONSE',
-  STAKEHOLDERSURVEYRESPONSE: 'STAKEHOLDERSURVEYRESPONSE',
-  INTERNSHIP: 'INTERNSHIP',
-  UNDERGRADRESEARCHEXPERIENCE: 'UNDERGRADRESEARCHEXPERIENCE'
+enum MeasureType {
+  SSH= 'SSH',
+  FACULTYFTE = 'FACULTYFTE',
+  EXTRAMURALFUNDING = 'EXTRAMURALFUNDING',
+  RETENTION = 'RETENTION',
+  PUBLICATIONS = 'PUBLICATIONS',
+  GRADUATESTUDENTSUPPORTFTE = 'GRADUATESTUDENTSUPPORTFTE',
+  GRADUATES = 'GRADUATES',
+  TIMETODEGREE = 'TIMETODEGREE',
+  ADMISSIONS = 'ADMISSIONS',
+  COURSEEVALUATIONRESPONSE = 'COURSEEVALUATIONRESPONSE',
+  EXITSURVEYRESPONSE = 'EXITSURVEYRESPONSE',
+  STAKEHOLDERSURVEYRESPONSE = 'STAKEHOLDERSURVEYRESPONSE',
+  INTERNSHIP = 'INTERNSHIP',
+  UNDERGRADRESEARCHEXPERIENCE = 'UNDERGRADRESEARCHEXPERIENCE'
 }
 
-interface measurement {
+interface Measurement {
   value: number,
   label?: string,
   year?: number
 }
 
-interface YearData {
-  SSH: measurement[],
-  FACULTYFTE: measurement[],
-  EXTRAMURALFUNDING: measurement[],
-  RETENTION: measurement[],
-  PUBLICATIONS: measurement[],
-  GRADUATESTUDENTSUPPORTFTE: measurement[],
-  GRADUATES: measurement[],
-  TIMETODEGREE: measurement[],
-  ADMISSIONS: measurement[],
-  COURSEEVALUATIONRESPONSE: measurement[],
-  EXITSURVEYRESPONSE: measurement[],
-  STAKEHOLDERSURVEYRESPONSE: measurement[],
-  INTERNSHIP: measurement[],
-  UNDERGRADRESEARCHEXPERIENCE: measurement[],
+type YearData = {
+  [measureType in MeasureType]: Measurement[];
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface DashboardDB {
+  [year: number]: { yearData: YearData, breakdownData: any }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface dashboardDB {
-  year1: number,
-  year1Data: YearData,
-  year2: number,
-  year2Data: YearData,
-  year3: number,
-  year3Data: YearData,
-  year4: number,
-  year4Data: YearData,
-  year5: number,
-  year5Data: YearData
-}
+let dashboardDB: DashboardDB;
+
 
 const makeRandomData = (num: number, range = 101) => {
   const data = [];
