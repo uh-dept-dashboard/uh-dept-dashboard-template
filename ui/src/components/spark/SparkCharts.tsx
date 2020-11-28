@@ -1,15 +1,26 @@
 import React from 'react';
-import {LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis} from 'recharts';
-import { theme } from '../../Theme';
+import {LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, Dot, DotProps} from 'recharts';
+import {theme} from '../../Theme';
 
 interface SparkProps {
-  data: { value: number, label?: string }[]
+  data: { value: number, label?: string, year?: number }[]
+}
+
+function customDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<Dot> & Readonly<DotProps> & Readonly<{ children?: React.ReactNode; }>) {
+  // @ts-ignore
+  if (dotProps.payload.year && dotProps.payload.year === 2019) {
+    // @ts-ignore
+    dotProps.stroke = 'red';
+    // @ts-ignore
+    dotProps.fill = 'red';
+  }
+  return <Dot {...dotProps}/>
 }
 
 const LineSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <LineChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
-      <Line type='monotone' dataKey='value' stroke={theme.color.green} strokeWidth={2} />
+      <Line isAnimationActive={false} type='monotone' dataKey='value' stroke={theme.color.green} strokeWidth={2} dot={customDot} />
     </LineChart>
   )
 }

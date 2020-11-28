@@ -1,35 +1,99 @@
 import {ChartType, Units} from "../Theme";
-import { AYMeasureCardProps } from "../pages/landing/AYMeasureCard";
+import {AYMeasureCardProps} from "../pages/landing/AYMeasureCard";
+
+const endYear = 2019;
+const startYear = endYear - 4;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const measureType = {
+  SSH: 'SSH',
+  FACULTYFTE: 'FACULTYFTE',
+  EXTRAMURALFUNDING: 'EXTRAMURALFUNDING',
+  RETENTION: 'RETENTION',
+  PUBLICATIONS: 'PUBLICATIONS',
+  GRADUATESTUDENTSUPPORTFTE: 'GRADUATESTUDENTSUPPORTFTE',
+  GRADUATES: 'GRADUATES',
+  TIMETODEGREE: 'TIMETODEGREE',
+  ADMISSIONS: 'ADMISSIONS',
+  COURSEEVALUATIONRESPONSE: 'COURSEEVALUATIONRESPONSE',
+  EXITSURVEYRESPONSE: 'EXITSURVEYRESPONSE',
+  STAKEHOLDERSURVEYRESPONSE: 'STAKEHOLDERSURVEYRESPONSE',
+  INTERNSHIP: 'INTERNSHIP',
+  UNDERGRADRESEARCHEXPERIENCE: 'UNDERGRADRESEARCHEXPERIENCE'
+}
+
+interface measurement {
+  value: number,
+  label?: string,
+  year?: number
+}
+
+interface YearData {
+  SSH: measurement[],
+  FACULTYFTE: measurement[],
+  EXTRAMURALFUNDING: measurement[],
+  RETENTION: measurement[],
+  PUBLICATIONS: measurement[],
+  GRADUATESTUDENTSUPPORTFTE: measurement[],
+  GRADUATES: measurement[],
+  TIMETODEGREE: measurement[],
+  ADMISSIONS: measurement[],
+  COURSEEVALUATIONRESPONSE: measurement[],
+  EXITSURVEYRESPONSE: measurement[],
+  STAKEHOLDERSURVEYRESPONSE: measurement[],
+  INTERNSHIP: measurement[],
+  UNDERGRADRESEARCHEXPERIENCE: measurement[],
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface dashboardDB {
+  year1: number,
+  year1Data: YearData,
+  year2: number,
+  year2Data: YearData,
+  year3: number,
+  year3Data: YearData,
+  year4: number,
+  year4Data: YearData,
+  year5: number,
+  year5Data: YearData
+}
 
 const makeRandomData = (num: number, range = 101) => {
   const data = [];
   for (let i = 0; i < num; i++) {
-    data.push({ value: Math.floor(Math.random() * range) });
+    data.push({value: Math.floor(Math.random() * range), year: startYear + i});
   }
   return data;
 }
 
 const makeSortedData = (num: number, range = 101) => {
-  const data = [];
+  let data = [];
   for (let i = 0; i < num; i++) {
-    data.push({ value: Math.floor(Math.random() * range) });
+    data.push({value: Math.floor(Math.random() * range), year: 0});
   }
-  return data.sort(function(a, b){return a.value - b.value });
+  data = data.sort(function (a, b) {
+    return a.value - b.value
+  });
+  for (let i = 0; i < num; i++) {
+    data[i].year = startYear + i;
+  }
+  return data;
 }
 
 const makeDemographicPieBreakdown = () => {
   const women = Math.floor(Math.random() * 20) + 3;
   const men = 100 - women;
   const data = [];
-  data.push({ value: women, label: 'Women'});
-  data.push({ value: men, label: 'Men'});
+  data.push({value: women, label: 'Women'});
+  data.push({value: men, label: 'Men'});
   const caucasian = 50 + Math.floor(Math.random() * 20);
   const nativeHawaiian = Math.floor(Math.random() * 10);
   const other = 100 - caucasian - nativeHawaiian;
-  data.push({ value: caucasian, label: 'Caucasian'});
-  data.push({ value: nativeHawaiian, label: 'Native Hawaiian'});
-  data.push({ value: other, label: 'Other'});
-  return { chartType: ChartType.DemographicPieSpark, chartTitle: 'Breakdown by gender, ethnicity', chartData: data}
+  data.push({value: caucasian, label: 'Caucasian'});
+  data.push({value: nativeHawaiian, label: 'Native Hawaiian'});
+  data.push({value: other, label: 'Other'});
+  return {chartType: ChartType.DemographicPieSpark, chartTitle: 'Breakdown by gender, ethnicity', chartData: data}
 }
 
 const makeInternshipBreakdown = () => {
@@ -37,10 +101,10 @@ const makeInternshipBreakdown = () => {
   const hawaii = 50 + Math.floor(Math.random() * 20);
   const mainland = Math.floor(Math.random() * 10);
   const other = 100 - hawaii - mainland;
-  data.push({ value: hawaii, label: 'Hawaii'});
-  data.push({ value: mainland, label: 'Mainland'});
-  data.push({ value: other, label: 'Other'});
-  return { chartType: ChartType.PieSpark, chartTitle: 'Breakdown by location', chartData: data}
+  data.push({value: hawaii, label: 'Hawaii'});
+  data.push({value: mainland, label: 'Mainland'});
+  data.push({value: other, label: 'Other'});
+  return {chartType: ChartType.PieSpark, chartTitle: 'Breakdown by location', chartData: data}
 }
 
 const makeUndergraduateResearchExperienceBreakdown = () => {
@@ -48,65 +112,65 @@ const makeUndergraduateResearchExperienceBreakdown = () => {
   const urop = 50 + Math.floor(Math.random() * 20);
   const faculty = Math.floor(Math.random() * 10);
   const unfunded = 100 - urop - faculty;
-  data.push({ value: urop, label: 'UROP'});
-  data.push({ value: faculty, label: 'Faculty'});
-  data.push({ value: unfunded, label: 'Unfunded'});
-  return { chartType: ChartType.PieSpark, chartTitle: 'Breakdown by funding', chartData: data}
+  data.push({value: urop, label: 'UROP'});
+  data.push({value: faculty, label: 'Faculty'});
+  data.push({value: unfunded, label: 'Unfunded'});
+  return {chartType: ChartType.PieSpark, chartTitle: 'Breakdown by funding', chartData: data}
 }
 
 const makePublicationTierBreakdown = () => {
   const data = [];
-  data.push({ value: Math.floor(Math.random() * 100), label: 'Tier 1'});
-  data.push({ value: Math.floor(Math.random() * 100), label: 'Tier 2'});
-  data.push({ value: Math.floor(Math.random() * 100), label: 'Other'});
-  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by publication quality', chartData: data}
+  data.push({value: Math.floor(Math.random() * 100), label: 'Tier 1'});
+  data.push({value: Math.floor(Math.random() * 100), label: 'Tier 2'});
+  data.push({value: Math.floor(Math.random() * 100), label: 'Other'});
+  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by publication quality', chartData: data}
 }
 
 const makeTimeToDegreeBreakdown = () => {
   const data = [];
-  data.push({ value: 2, label: '< 6'});
-  data.push({ value: Math.floor(Math.random() * 10), label: '6-8'});
-  data.push({ value: Math.floor(Math.random() * 10), label: '8-10'});
-  data.push({ value: Math.floor(Math.random() * 10), label: '10-12'});
-  data.push({ value: 2, label: '12+'});
-  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by number of semesters', chartData: data}
+  data.push({value: 2, label: '< 6'});
+  data.push({value: Math.floor(Math.random() * 10), label: '6-8'});
+  data.push({value: Math.floor(Math.random() * 10), label: '8-10'});
+  data.push({value: Math.floor(Math.random() * 10), label: '10-12'});
+  data.push({value: 2, label: '12+'});
+  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by number of semesters', chartData: data}
 }
 
 const makeAdmissionsBreakdown = () => {
   const data = [];
-  data.push({ value: Math.floor(Math.random() * 100), label: 'B.A.'});
-  data.push({ value: Math.floor(Math.random() * 100), label: 'B.S.'});
-  data.push({ value: Math.floor(Math.random() * 50), label: 'M.S.'});
-  data.push({ value: Math.floor(Math.random() * 50), label: 'Ph.D.'});
-  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by degree program', chartData: data}
+  data.push({value: Math.floor(Math.random() * 100), label: 'B.A.'});
+  data.push({value: Math.floor(Math.random() * 100), label: 'B.S.'});
+  data.push({value: Math.floor(Math.random() * 50), label: 'M.S.'});
+  data.push({value: Math.floor(Math.random() * 50), label: 'Ph.D.'});
+  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by degree program', chartData: data}
 }
 
 const makeCourseEvaluationBreakdown = () => {
   const data = [];
-  data.push({ value: Math.floor(Math.random() * 100), label: 'Disagree'});
-  data.push({ value: Math.floor(Math.random() * 100), label: ''});
-  data.push({ value: Math.floor(Math.random() * 100), label: ''});
-  data.push({ value: Math.floor(Math.random() * 50), label: ''});
-  data.push({ value: Math.floor(Math.random() * 50), label: 'Agree'});
-  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by agreement', chartData: data}
+  data.push({value: Math.floor(Math.random() * 100), label: 'Disagree'});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: 'Agree'});
+  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by agreement', chartData: data}
 }
 
 const makeExitSurveyBreakdown = () => {
   const data = [];
-  data.push({ value: Math.floor(Math.random() * 100), label: 'UH'});
-  data.push({ value: Math.floor(Math.random() * 80), label: 'Another school'});
-  data.push({ value: Math.floor(Math.random() * 50), label: 'No school'});
-  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by response', chartData: data}
+  data.push({value: Math.floor(Math.random() * 100), label: 'UH'});
+  data.push({value: Math.floor(Math.random() * 80), label: 'Another school'});
+  data.push({value: Math.floor(Math.random() * 50), label: 'No school'});
+  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by response', chartData: data}
 }
 
 const makeStakeholderSurveyBreakdown = () => {
   const data = [];
-  data.push({ value: Math.floor(Math.random() * 50), label: 'Unsatisfied'});
-  data.push({ value: Math.floor(Math.random() * 100), label: ''});
-  data.push({ value: Math.floor(Math.random() * 100), label: ''});
-  data.push({ value: Math.floor(Math.random() * 50), label: ''});
-  data.push({ value: Math.floor(Math.random() * 50), label: 'Satisfied'});
-  return { chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by satisfaction', chartData: data}
+  data.push({value: Math.floor(Math.random() * 50), label: 'Unsatisfied'});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: 'Satisfied'});
+  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by satisfaction', chartData: data}
 }
 
 const makeFiveYearTrendBreakdown = () => {
@@ -118,13 +182,13 @@ const makeFiveYearTrendBreakdown = () => {
 }
 
 const makeByFacultyBreakdown = () => {
-  return { chartType: ChartType.BarSpark, chartTitle: 'By faculty', chartData: makeSortedData(15, 10)}
+  return {chartType: ChartType.BarSpark, chartTitle: 'By faculty', chartData: makeSortedData(15, 10)}
 }
 
 const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
-const makeAYValue = (lower:number, upper:number) => Math.floor(Math.random() * (upper - lower) + lower);
+const makeAYValue = (lower: number, upper: number) => Math.floor(Math.random() * (upper - lower) + lower);
 
-function makeAYMeasureCardProps (name: string, year: number, description: string, lower: number, upper :number): AYMeasureCardProps {
+function makeAYMeasureCardProps(name: string, year: number, description: string, lower: number, upper: number): AYMeasureCardProps {
   return {
     name,
     value: makeAYValue(lower, upper),
@@ -169,7 +233,7 @@ function makePublicationsProps(year: number): AYMeasureCardProps {
 }
 
 function makeGraduateStudentSupportFTEProps(year: number): AYMeasureCardProps {
-  const props =  makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 120, 140);
+  const props = makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 120, 140);
   props.value = props.value / 10;
   props.sparks.push(makeByFacultyBreakdown());
   return props;
@@ -236,4 +300,20 @@ function makeUndergraduateResearchExperienceProps(year: number): AYMeasureCardPr
   return props;
 }
 
-export { makeSSHCardProps, makeFacultyFTEProps,makeExtramuralFundingProps, makeRetentionProps, makePublicationsProps, makeGraduateStudentSupportFTEProps, makeGraduatesProps, makeTDDProps, makeAdmissionsProps, makeCourseEvaluationOneProps, makeCourseEvaluationTwoProps, makeExitSurveyProps, makeStakeholderSurveyProps, makeInternshipProps, makeUndergraduateResearchExperienceProps};
+export {
+  makeSSHCardProps,
+  makeFacultyFTEProps,
+  makeExtramuralFundingProps,
+  makeRetentionProps,
+  makePublicationsProps,
+  makeGraduateStudentSupportFTEProps,
+  makeGraduatesProps,
+  makeTDDProps,
+  makeAdmissionsProps,
+  makeCourseEvaluationOneProps,
+  makeCourseEvaluationTwoProps,
+  makeExitSurveyProps,
+  makeStakeholderSurveyProps,
+  makeInternshipProps,
+  makeUndergraduateResearchExperienceProps
+};
