@@ -1,9 +1,19 @@
 import {ChartType, Units} from "../Theme";
 import {AYMeasureCardProps} from "../pages/landing/AYMeasureCard";
-import {Breakdowns, DashboardDB, Measurement, MeasurementSet, MeasureType, UnitType, BreakdownType} from "../DataTypes";
+import {
+  Breakdowns,
+  DashboardDB,
+  Measurement,
+  MeasurementSet,
+  MeasureType,
+  UnitType,
+  BreakdownType,
+  BreakdownYearSet
+} from "../DataTypes";
 
 const endYear = 2019;
 const startYear = endYear - 4;
+const yearList = ['2015', '2016', '2017', '2018', '2019'];
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -11,22 +21,57 @@ function makeDashboardDB(): DashboardDB {
   const dashboardDB: DashboardDB = {};
   dashboardDB[MeasureType.SSH] = {
     unitType: UnitType.Number,
+    description: 'Measures the amount of instruction.',
     trend: makeMeasurementTrend(1000, 1500),
     breakdowns: makeSSHBreakdowns()
+  }
+  dashboardDB[MeasureType.FACULTYFTE] = {
+    unitType: UnitType.Number,
+    description: 'Measures the number of faculty available for teaching, research and service.',
+    trend: makeMeasurementTrend(15, 20),
+    breakdowns: makeFacultyFTEBreakdowns()
   }
   return dashboardDB;
 }
 
 function makeSSHBreakdowns(): Breakdowns {
   const breakdowns: Breakdowns = {};
-  breakdowns[BreakdownType.BYFACULTY] = makeSortedMeasurements(15, 10);
+  const byFaculty: BreakdownYearSet = {};
+  for (const year of yearList) {
+    byFaculty[year] = makeSortedMeasurements(15, 10);
+  }
+  breakdowns[BreakdownType.BYFACULTY] = byFaculty;
   return breakdowns;
+}
+
+function makeFacultyFTEBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const byDemographic: BreakdownYearSet = {};
+  for (const year of yearList) {
+    byDemographic[year] = makeDemographicMeasurements();
+  }
+  breakdowns[BreakdownType.DEMOGRAPHIC] = byDemographic;
+  return breakdowns;
+}
+
+function makeDemographicMeasurements(): Measurement[] {
+  const women = Math.floor(Math.random() * 20) + 3;
+  const men = 100 - women;
+  const data = [];
+  data.push({value: women, label: 'Women'});
+  data.push({value: men, label: 'Men'});
+  const caucasian = 50 + Math.floor(Math.random() * 20);
+  const nativeHawaiian = Math.floor(Math.random() * 10);
+  const other = 100 - caucasian - nativeHawaiian;
+  data.push({value: caucasian, label: 'Caucasian'});
+  data.push({value: nativeHawaiian, label: 'Native Hawaiian'});
+  data.push({value: other, label: 'Other'});
+  return data;
 }
 
 function makeMeasurementTrend(lower: number, upper: number): MeasurementSet {
  const trend: MeasurementSet = {};
- for (let i = startYear; i <= endYear; i++) {
-   const year = `${i}`;
+ for (const year of yearList) {
    const value = Math.floor(Math.random() * (upper - lower) + lower);
    trend[year] = { value };
  }
