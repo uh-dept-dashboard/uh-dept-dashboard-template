@@ -1,46 +1,40 @@
 import {ChartType, Units} from "../Theme";
 import {AYMeasureCardProps} from "../pages/landing/AYMeasureCard";
+import {Breakdowns, DashboardDB, Measurement, MeasurementSet, MeasureType, UnitType, BreakdownType} from "../DataTypes";
 
 const endYear = 2019;
 const startYear = endYear - 4;
 
-enum MeasureType {
-  SSH= 'SSH',
-  FACULTYFTE = 'FACULTYFTE',
-  EXTRAMURALFUNDING = 'EXTRAMURALFUNDING',
-  RETENTION = 'RETENTION',
-  PUBLICATIONS = 'PUBLICATIONS',
-  GRADUATESTUDENTSUPPORTFTE = 'GRADUATESTUDENTSUPPORTFTE',
-  GRADUATES = 'GRADUATES',
-  TIMETODEGREE = 'TIMETODEGREE',
-  ADMISSIONS = 'ADMISSIONS',
-  COURSEEVALUATIONRESPONSE = 'COURSEEVALUATIONRESPONSE',
-  EXITSURVEYRESPONSE = 'EXITSURVEYRESPONSE',
-  STAKEHOLDERSURVEYRESPONSE = 'STAKEHOLDERSURVEYRESPONSE',
-  INTERNSHIP = 'INTERNSHIP',
-  UNDERGRADRESEARCHEXPERIENCE = 'UNDERGRADRESEARCHEXPERIENCE'
-}
-
-interface Measurement {
-  value: number,
-  label?: string,
-  year?: number
-}
-
-type YearData = {
-  [measureType in MeasureType]: Measurement[];
-};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface DashboardDB {
-  [year: number]: { yearData: YearData, breakdownData: any }
+function makeDashboardDB(): DashboardDB {
+  const dashboardDB: DashboardDB = {};
+  dashboardDB[MeasureType.SSH] = {
+    unitType: UnitType.Number,
+    trend: makeMeasurementTrend(1000, 1500),
+    breakdowns: makeSSHBreakdowns()
+  }
+  return dashboardDB;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let dashboardDB: DashboardDB;
+function makeSSHBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  breakdowns[BreakdownType.BYFACULTY] = makeSortedMeasurements(15, 10);
+  return breakdowns;
+}
+
+function makeMeasurementTrend(lower: number, upper: number): MeasurementSet {
+ const trend: MeasurementSet = {};
+ for (let i = startYear; i <= endYear; i++) {
+   const year = `${i}`;
+   const value = Math.floor(Math.random() * (upper - lower) + lower);
+   trend[year] = { value };
+ }
+ return trend;
+}
 
 
-const makeRandomData = (num: number, range = 101) => {
+function makeRandomMeasurements(num: number, range = 101): Measurement[] {
   const data = [];
   for (let i = 0; i < num; i++) {
     data.push({value: Math.floor(Math.random() * range), year: startYear + i});
@@ -48,7 +42,7 @@ const makeRandomData = (num: number, range = 101) => {
   return data;
 }
 
-const makeSortedData = (num: number, range = 101) => {
+function makeSortedMeasurements(num: number, range = 101): Measurement[] {
   let data = [];
   for (let i = 0; i < num; i++) {
     data.push({value: Math.floor(Math.random() * range), year: 0});
@@ -158,12 +152,12 @@ const makeFiveYearTrendBreakdown = () => {
   return {
     chartType: ChartType.LineSpark,
     chartTitle: 'Five year trend',
-    chartData: makeRandomData(5)
+    chartData: makeRandomMeasurements(5)
   }
 }
 
 const makeByFacultyBreakdown = () => {
-  return {chartType: ChartType.BarSpark, chartTitle: 'By faculty', chartData: makeSortedData(15, 10)}
+  return {chartType: ChartType.BarSpark, chartTitle: 'By faculty', chartData: makeSortedMeasurements(15, 10)}
 }
 
 const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
