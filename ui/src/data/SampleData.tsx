@@ -23,18 +23,30 @@ function makeDashboardDB(): DashboardDB {
     unitType: UnitType.Number,
     description: 'Measures the amount of instruction.',
     trend: makeMeasurementTrend(1000, 1500),
-    breakdowns: makeSSHBreakdowns()
+    breakdowns: makeByFacultyBreakdowns()
   }
   dashboardDB[MeasureType.FACULTYFTE] = {
     unitType: UnitType.Number,
     description: 'Measures the number of faculty available for teaching, research and service.',
     trend: makeMeasurementTrend(15, 20),
-    breakdowns: makeFacultyFTEBreakdowns()
+    breakdowns: makeByGenderEthnicityBreakdowns()
+  }
+  dashboardDB[MeasureType.EXTRAMURALFUNDING] = {
+    unitType: UnitType.Dollars,
+    description: 'Measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole) for this AY',
+    trend: makeMeasurementTrend(2000000, 3000000),
+    breakdowns: makeByFacultyBreakdowns()
+  }
+  dashboardDB[MeasureType.RETENTION] = {
+    unitType: UnitType.Percent,
+    description: 'Measures the percentage of students entering the academic program who receive a degree in it.',
+    trend: makeMeasurementTrend(20, 30),
+    breakdowns: makeByGenderEthnicityBreakdowns()
   }
   return dashboardDB;
 }
 
-function makeSSHBreakdowns(): Breakdowns {
+function makeByFacultyBreakdowns(): Breakdowns {
   const breakdowns: Breakdowns = {};
   const trend: BreakdownTrend = {};
   for (const year of yearList) {
@@ -44,7 +56,7 @@ function makeSSHBreakdowns(): Breakdowns {
   return breakdowns;
 }
 
-function makeFacultyFTEBreakdowns(): Breakdowns {
+function makeByGenderEthnicityBreakdowns(): Breakdowns {
   const breakdowns: Breakdowns = {};
   const trend: BreakdownTrend = {};
   for (const year of yearList) {
