@@ -4,11 +4,11 @@ import {
   Breakdowns,
   DashboardDB,
   Measurement,
-  MeasurementSet,
+  MeasureTrend,
   MeasureType,
   UnitType,
   BreakdownType,
-  BreakdownYearSet
+  BreakdownTrend
 } from "../DataTypes";
 
 const endYear = 2019;
@@ -36,21 +36,21 @@ function makeDashboardDB(): DashboardDB {
 
 function makeSSHBreakdowns(): Breakdowns {
   const breakdowns: Breakdowns = {};
-  const byFaculty: BreakdownYearSet = {};
+  const trend: BreakdownTrend = {};
   for (const year of yearList) {
-    byFaculty[year] = makeSortedMeasurements(15, 10);
+    trend[year] = makeSortedMeasurements(15, 10);
   }
-  breakdowns[BreakdownType.BYFACULTY] = byFaculty;
+  breakdowns[BreakdownType.BYFACULTY] = { description: 'By faculty', trend: trend };
   return breakdowns;
 }
 
 function makeFacultyFTEBreakdowns(): Breakdowns {
   const breakdowns: Breakdowns = {};
-  const byDemographic: BreakdownYearSet = {};
+  const trend: BreakdownTrend = {};
   for (const year of yearList) {
-    byDemographic[year] = makeDemographicMeasurements();
+    trend[year] = makeDemographicMeasurements();
   }
-  breakdowns[BreakdownType.DEMOGRAPHIC] = byDemographic;
+  breakdowns[BreakdownType.DEMOGRAPHIC] = { description: 'By gender, ethnicity', trend: trend };
   return breakdowns;
 }
 
@@ -69,8 +69,8 @@ function makeDemographicMeasurements(): Measurement[] {
   return data;
 }
 
-function makeMeasurementTrend(lower: number, upper: number): MeasurementSet {
- const trend: MeasurementSet = {};
+function makeMeasurementTrend(lower: number, upper: number): MeasureTrend {
+ const trend: MeasureTrend = {};
  for (const year of yearList) {
    const value = Math.floor(Math.random() * (upper - lower) + lower);
    trend[year] = { value };
