@@ -15,8 +15,6 @@ const endYear = 2019;
 const startYear = endYear - 4;
 const yearList = ['2015', '2016', '2017', '2018', '2019'];
 
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function makeDashboardDB(): DashboardDB {
   const dashboardDB: DashboardDB = {};
   dashboardDB[MeasureType.SSH] = {
@@ -43,7 +41,144 @@ function makeDashboardDB(): DashboardDB {
     trend: makeMeasurementTrend(20, 30),
     breakdowns: makeByGenderEthnicityBreakdowns()
   }
+  dashboardDB[MeasureType.PUBLICATIONS] = {
+    unitType: UnitType.Number,
+    description: 'Measures the number of published scholarly works.',
+    trend: makeMeasurementTrend(20, 30),
+    breakdowns: makeByPublicationQualityBreakdowns()
+  }
+  dashboardDB[MeasureType.GRADUATESTUDENTSUPPORTFTE] = {
+    unitType: UnitType.Number,
+    description: 'Measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.',
+    trend: makeMeasurementTrend(100, 200, 10),
+    breakdowns: makeByFacultyBreakdowns()
+  }
+  dashboardDB[MeasureType.GRADUATES] = {
+    unitType: UnitType.Number,
+    description: 'Measures the number of students receiving a degree.',
+    trend: makeMeasurementTrend(100, 200),
+    breakdowns: makeByGenderEthnicityBreakdowns()
+  }
+  dashboardDB[MeasureType.TIMETODEGREE] = {
+    unitType: UnitType.Number,
+    description: 'Measures the number of semesters required by this year\'s graduates to obtain their undergraduate degree.',
+    trend: makeMeasurementTrend(70, 100, 10),
+    breakdowns: makeByNumberSemesterBreakdowns()
+  }
+  dashboardDB[MeasureType.ADMISSIONS] = {
+    unitType: UnitType.Number,
+    description: 'Measures the number of students admitted.',
+    trend: makeMeasurementTrend(70, 100),
+    breakdowns: makeByDegreeProgramBreakdowns()
+  }
+  dashboardDB[MeasureType.COURSEEVALUATIONRESPONSE] = {
+    unitType: UnitType.Number,
+    description: 'Measures responses to: "As a professional student, I found this course attractive and compatible with my work life."',
+    trend: makeMeasurementTrend(30, 50, 10),
+    breakdowns: makeCourseEvaluationResponseBreakdowns()
+  }
   return dashboardDB;
+  dashboardDB[MeasureType.COURSEEVALUATIONRESPONSE2] = {
+    unitType: UnitType.Number,
+    description: 'Measures responses to: "This course provided opportunities for me to improve my software development skills"',
+    trend: makeMeasurementTrend(30, 50, 10),
+    breakdowns: makeCourseEvaluationResponseBreakdowns()
+  }
+  dashboardDB[MeasureType.EXITSURVEYRESPONSE] = {
+    unitType: UnitType.Percent,
+    description: 'Measures responses to: "If you could start your higher education experience over, would you still attend this program?',
+    trend: makeMeasurementTrend(40, 60),
+    breakdowns: makeExitSurveyResponseBreakdowns()
+  }
+  dashboardDB[MeasureType.STAKEHOLDERSURVEYRESPONSE] = {
+    unitType: UnitType.Number,
+    description: 'Measures responses to: "I am satisfied with the quality of graduates from this program."',
+    trend: makeMeasurementTrend(30, 50, 10),
+    breakdowns: makeStakeholderSurveyResponseBreakdowns()
+  }
+  dashboardDB[MeasureType.INTERNSHIP] = {
+    unitType: UnitType.Percent,
+    description: 'Measures percentage of this year\'s graduates who participated in an internship program.',
+    trend: makeMeasurementTrend(30, 50),
+    breakdowns: makeInternshipBreakdowns()
+  }
+  dashboardDB[MeasureType.UNDERGRADRESEARCHEXPERIENCE] = {
+    unitType: UnitType.Percent,
+    description: 'Measures percentage of this year\'s graduates who participated in an undergraduate research experience.',
+    trend: makeMeasurementTrend(40, 60),
+    breakdowns: makeUndergraduateResearchExperienceBreakdowns()
+  }
+  return dashboardDB;
+}
+
+function makeUndergraduateResearchExperienceBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeUndergraduateResearchExperienceMeasurements();
+  }
+  breakdowns[BreakdownType.UNDERGRADUATERESEARCHEXPERIENCE] = { description: 'By funding', trend: trend };
+  return breakdowns;
+}
+
+function makeInternshipBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeInternshipMeasurements();
+  }
+  breakdowns[BreakdownType.INTERNSHIP] = { description: 'By location', trend: trend };
+  return breakdowns;
+}
+
+function makeStakeholderSurveyResponseBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeStakeholderSurveyMeasurements();
+  }
+  breakdowns[BreakdownType.STAKEHOLDERSURVEY] = { description: 'By satisfaction', trend: trend };
+  return breakdowns;
+}
+
+function makeExitSurveyResponseBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeExitSurveyMeasurements();
+  }
+  breakdowns[BreakdownType.EXITSURVEY] = { description: 'By response', trend: trend };
+  return breakdowns;
+}
+
+function makeCourseEvaluationResponseBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeCourseEvaluationMeasurements();
+  }
+  breakdowns[BreakdownType.COURSEEVALUATION] = { description: 'By agreement', trend: trend };
+  return breakdowns;
+}
+
+function makeByPublicationQualityBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makePublicationQualityMeasurements();
+  }
+  breakdowns[BreakdownType.PUBLICATIONTIER] = { description: 'By publication quality', trend: trend };
+  return breakdowns;
+}
+
+function makeByDegreeProgramBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeByDegreeProgramMeasurements();
+  }
+  breakdowns[BreakdownType.DEGREEPROGRAM] = { description: 'By degree program', trend: trend };
+  return breakdowns;
 }
 
 function makeByFacultyBreakdowns(): Breakdowns {
@@ -66,6 +201,85 @@ function makeByGenderEthnicityBreakdowns(): Breakdowns {
   return breakdowns;
 }
 
+function makeByNumberSemesterBreakdowns(): Breakdowns {
+  const breakdowns: Breakdowns = {};
+  const trend: BreakdownTrend = {};
+  for (const year of yearList) {
+    trend[year] = makeByNumberSemesterMeasurements();
+  }
+  breakdowns[BreakdownType.NUMBERSEMESTERS] = { description: 'By number of semesters', trend: trend };
+  return breakdowns;
+}
+
+function makeUndergraduateResearchExperienceMeasurements(): Measurement[] {
+  const data = [];
+  const urop = 50 + Math.floor(Math.random() * 20);
+  const faculty = Math.floor(Math.random() * 10);
+  const unfunded = 100 - urop - faculty;
+  data.push({value: urop, label: 'UROP'});
+  data.push({value: faculty, label: 'Faculty'});
+  data.push({value: unfunded, label: 'Unfunded'});
+  return data;
+}
+
+function makeInternshipMeasurements(): Measurement[] {
+  const data = [];
+  const hawaii = 50 + Math.floor(Math.random() * 20);
+  const mainland = Math.floor(Math.random() * 10);
+  const other = 100 - hawaii - mainland;
+  data.push({value: hawaii, label: 'Hawaii'});
+  data.push({value: mainland, label: 'Mainland'});
+  data.push({value: other, label: 'Other'});
+  return data;
+}
+
+function makeExitSurveyMeasurements(): Measurement[] {
+  const data = [];
+  data.push({value: Math.floor(Math.random() * 100), label: 'UH'});
+  data.push({value: Math.floor(Math.random() * 80), label: 'Another school'});
+  data.push({value: Math.floor(Math.random() * 50), label: 'No school'});
+  return data;
+}
+
+function makeStakeholderSurveyMeasurements(): Measurement[] {
+  const data = [];
+  data.push({value: Math.floor(Math.random() * 100), label: 'Unsatisfied'});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: 'Satisfied'});
+  return data;
+}
+
+function makeCourseEvaluationMeasurements(): Measurement[] {
+  const data = [];
+  data.push({value: Math.floor(Math.random() * 100), label: 'Disagree'});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 100), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: ''});
+  data.push({value: Math.floor(Math.random() * 50), label: 'Agree'});
+  return data;
+}
+
+function makeByDegreeProgramMeasurements(): Measurement[] {
+  const data = [];
+  data.push({value: Math.floor(Math.random() * 100), label: 'B.A.'});
+  data.push({value: Math.floor(Math.random() * 100), label: 'B.S.'});
+  data.push({value: Math.floor(Math.random() * 50), label: 'M.S.'});
+  data.push({value: Math.floor(Math.random() * 50), label: 'Ph.D.'});
+  return data;
+}
+
+function makeByNumberSemesterMeasurements(): Measurement[] {
+  const data = [];
+  data.push({value: 2, label: '< 6'});
+  data.push({value: Math.floor(Math.random() * 10), label: '6-8'});
+  data.push({value: Math.floor(Math.random() * 10), label: '8-10'});
+  data.push({value: Math.floor(Math.random() * 10), label: '10-12'});
+  data.push({value: 2, label: '12+'});
+  return data;
+}
+
 function makeDemographicMeasurements(): Measurement[] {
   const women = Math.floor(Math.random() * 20) + 3;
   const men = 100 - women;
@@ -81,10 +295,20 @@ function makeDemographicMeasurements(): Measurement[] {
   return data;
 }
 
-function makeMeasurementTrend(lower: number, upper: number): MeasureTrend {
+function makePublicationQualityMeasurements(): Measurement[] {
+  const data = [];
+  data.push({value: Math.floor(Math.random() * 100), label: 'Tier 1'});
+  data.push({value: Math.floor(Math.random() * 100), label: 'Tier 2'});
+  data.push({value: Math.floor(Math.random() * 100), label: 'Other'});
+  return data;
+}
+
+
+function makeMeasurementTrend(lower: number, upper: number, divisor = 1): MeasureTrend {
  const trend: MeasureTrend = {};
  for (const year of yearList) {
-   const value = Math.floor(Math.random() * (upper - lower) + lower);
+   let value = Math.floor(Math.random() * (upper - lower) + lower);
+   value = value / divisor;
    trend[year] = { value };
  }
  return trend;
@@ -332,6 +556,8 @@ function makeUndergraduateResearchExperienceProps(year: number): AYMeasureCardPr
   return props;
 }
 
+const dashboardDB = makeDashboardDB();
+
 export {
   makeSSHCardProps,
   makeFacultyFTEProps,
@@ -347,5 +573,6 @@ export {
   makeExitSurveyProps,
   makeStakeholderSurveyProps,
   makeInternshipProps,
-  makeUndergraduateResearchExperienceProps
+  makeUndergraduateResearchExperienceProps,
+  dashboardDB
 };
