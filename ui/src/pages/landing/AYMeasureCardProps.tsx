@@ -18,9 +18,10 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const trendData = years.map(year => measureData.trend[`${year}`]!);
   const fiveYearTrend = { chartType: ChartType.LineSpark, chartTitle: 'Five year trend', chartData: trendData };
-  // const breakdownChart = sshData.breakdowns[0];
-  // const breakdownSpark = {chartType: breakdownChart.chartType, chartTitle: breakdownChart.chartTitle, chartData: breakdownChart.chartData[year]};
-  const sparks = [fiveYearTrend];
+  const breakdownChart = measureData.breakdowns[0];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const breakdownSpark = {chartType: breakdownChart.chartType, chartTitle: breakdownChart.chartTitle, chartData: breakdownChart.chartData[year]!};
+  const sparks = [fiveYearTrend, breakdownSpark];
   return { latestYear, name, value, description, year, priorDelta, nextDelta, sparks }
 }
 

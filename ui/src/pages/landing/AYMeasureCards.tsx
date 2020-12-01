@@ -12,9 +12,7 @@ interface AYMeasureCardsProps {
 }
 
 function makeCardInfo(latestYear: number, year: number, dashboardDB: DashboardDB) : AYMeasureCardProps[] {
-  return [
-    makeCardProps(MeasureType.SSH, latestYear, year, dashboardDB),
-  ]
+  return Object.values(MeasureType).map(measure => makeCardProps(measure, latestYear, year, dashboardDB));
 }
 
 /** Displays a set of Cards, each containing an AcademicYearMeasure. */
