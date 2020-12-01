@@ -6,19 +6,19 @@ import LandingPage from './pages/landing/LandingPage';
 import { DashboardDB } from "./DataTypes";
 
 type AppProps = {
-  latestAcademicYear: number,
+  latestYear: number,
   title: string
   dashboardDB: DashboardDB
 }
 
-const App: React.FunctionComponent<AppProps> = ({title, latestAcademicYear, dashboardDB}) => {
+const App: React.FunctionComponent<AppProps> = ({title, latestYear, dashboardDB}) => {
   return (
     <div>
       <Helmet>
         <title>{title}</title>
       </Helmet>
       <NavBar title={title}/>
-      <LandingPage latestAcademicYear={latestAcademicYear} dashboardDB={dashboardDB}/>
+      <LandingPage latestYear={latestYear} dashboardDB={dashboardDB}/>
     </div>
   );
 }

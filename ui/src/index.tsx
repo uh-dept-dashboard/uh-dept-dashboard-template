@@ -7,7 +7,7 @@ import { dashboardDB } from "./data/SampleData";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App title='UH Department Dashboard Template' latestAcademicYear={2019} dashboardDB = {dashboardDB} />
+    <App title='UH Department Dashboard Template' latestYear={2019} dashboardDB = {dashboardDB} />
   </React.StrictMode>,
   document.getElementById('root')
 );

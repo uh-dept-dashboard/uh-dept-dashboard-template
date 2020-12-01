@@ -4,16 +4,16 @@ import AYTabbedContainer from "./AYTabbedContainer";
 import {DashboardDB} from "../../DataTypes";
 
 type LandingPageProps = {
-  latestAcademicYear: number
+  latestYear: number
   dashboardDB: DashboardDB
 }
 
-const LandingPage: React.FunctionComponent<LandingPageProps> = ({latestAcademicYear, dashboardDB}) => {
-  const years = [latestAcademicYear - 4, latestAcademicYear - 3, latestAcademicYear - 2, latestAcademicYear - 1, latestAcademicYear ];
+const LandingPage: React.FunctionComponent<LandingPageProps> = ({latestYear, dashboardDB}) => {
+
 
   return (
     <Container fluid style={{paddingLeft: '10px', paddingRight: '10px'}}>
-      <AYTabbedContainer years={years} dashboardDB={dashboardDB}/>
+      <AYTabbedContainer latestYear={latestYear} dashboardDB={dashboardDB}/>
     </Container>
   );
 }

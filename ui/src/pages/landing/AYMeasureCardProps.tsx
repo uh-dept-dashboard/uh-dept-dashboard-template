@@ -4,24 +4,24 @@ import {DashboardDB, MeasureType} from "../../DataTypes";
 
 const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
 
-function makeSSHCardProps(year: number, dashboardDB: DashboardDB): AYMeasureCardProps {
+function makeCardProps(measureType: MeasureType, latestYear: number, year: number, dashboardDB: DashboardDB): AYMeasureCardProps {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const sshData = dashboardDB[MeasureType.SSH]!;
-  const name = sshData.name;
+  const measureData = dashboardDB[measureType]!;
+  const name = measureData.name;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const value = sshData.trend[year]!.value!;
-  const description = sshData.description;
+  const value = measureData.trend[year]!.value!;
+  const description = measureData.description;
   const priorDelta = makeDelta();
   const nextDelta = makeDelta();
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const fiveYearTrend = { chartType: ChartType.LineSpark, chartTitle: 'Five year trend', chartData: [sshData.trend[2015]!, sshData.trend[2016]!, sshData.trend[2017]!, sshData.trend[2018]!, sshData.trend[2019]!] };
+  const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear -1];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const trendData = years.map(year => measureData.trend[`${year}`]!);
+  const fiveYearTrend = { chartType: ChartType.LineSpark, chartTitle: 'Five year trend', chartData: trendData };
   // const breakdownChart = sshData.breakdowns[0];
   // const breakdownSpark = {chartType: breakdownChart.chartType, chartTitle: breakdownChart.chartTitle, chartData: breakdownChart.chartData[year]};
   const sparks = [fiveYearTrend];
-  return { name, value, description, year, priorDelta, nextDelta, sparks }
+  return { latestYear, name, value, description, year, priorDelta, nextDelta, sparks }
 }
 
-
-export {
-  makeSSHCardProps
-};
+export {makeCardProps};

@@ -12,6 +12,7 @@ interface SparkDataSet {
 
 
 interface AYMeasureCardProps {
+  latestYear: number,
   name: string,
   description: string,
   year: number,

@@ -5,13 +5,14 @@ import './AYTabbedContainer.css';
 import {DashboardDB} from "../../DataTypes";
 
 interface AYTabbedContainerProps  {
-  years: number[],
+  latestYear: number,
   dashboardDB: DashboardDB
 }
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
-const AYTabbedContainer: React.FunctionComponent<AYTabbedContainerProps> = ({ years, dashboardDB }) => {
-  const panes = years.map(year => { return { menuItem: `${year}`, render: () => <Tab.Pane><AYMeasureCards year={year} dashboardDB={dashboardDB}/></Tab.Pane>} })
+const AYTabbedContainer: React.FunctionComponent<AYTabbedContainerProps> = ({ latestYear, dashboardDB }) => {
+  const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear - 1, latestYear ];
+  const panes = years.map(year => { return { menuItem: `${year}`, render: () => <Tab.Pane><AYMeasureCards latestYear={latestYear} year={year} dashboardDB={dashboardDB}/></Tab.Pane>} })
 
   console.log(dashboardDB);
 
