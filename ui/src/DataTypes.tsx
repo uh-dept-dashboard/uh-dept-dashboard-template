@@ -1,6 +1,8 @@
 /**
  * The units associated with a Measure.
  */
+import {ChartType} from "./Theme";
+
 enum UnitType {
   Dollars = '$',
   Percent = '%',
@@ -40,7 +42,6 @@ enum BreakdownType {
   TIMETODEGREE = 'TIMETODEGREE',
   DEGREEPROGRAM = 'DEGREEPROGRAM',
   NUMBERSEMESTERS = 'NUMBERSEMESTERS',
-  ADMISSIONS = 'ADMISSIONS',
   COURSEEVALUATION = 'COURSEEVALUATION',
   EXITSURVEY = 'EXITSURVEY',
   STAKEHOLDERSURVEY = 'STAKEHOLDERSURVEY'
@@ -79,6 +80,7 @@ type BreakdownTrend = {
  */
 interface BreakdownInfo {
   description: string,
+  chartType: ChartType,
   trend: BreakdownTrend
 }
 
@@ -94,6 +96,7 @@ type Breakdowns = {
  * The global data structure containing all Measures and Breakdowns.
  *  db = {
  *    SSH: {
+ *      name: 'SSH',
  *      unitType: 'Number',
  *      description: 'Measures the amount of instruction.'
  *      trend: { 2015: {value: 23}, 2016: {value: 24}, 2017: {value: 25}, 2018: {value: 26}, 2019: {value: 27}},
@@ -106,6 +109,7 @@ type Breakdowns = {
  */
 type DashboardDB = {
   [measureType in MeasureType]?: {
+    name: string,
     unitType: UnitType,
     description: string,
     trend: MeasureTrend,

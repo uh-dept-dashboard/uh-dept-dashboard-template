@@ -15,34 +15,36 @@ import {
   makeSSHCardProps, makeStakeholderSurveyProps,
   makeTDDProps, makeUndergraduateResearchExperienceProps
 } from "../../data/SampleData";
+import {DashboardDB} from "../../DataTypes";
 
 interface AYMeasureCardsProps {
-  year: number
+  year: number,
+  dashboardDB: DashboardDB
 }
 
-function makeCardInfo(year: number) : AYMeasureCardProps[] {
+function makeCardInfo(year: number, dashboardDB: DashboardDB) : AYMeasureCardProps[] {
   return [
-    makeSSHCardProps(year),
-    makeFacultyFTEProps(year),
-    makeExtramuralFundingProps(year),
-    makeRetentionProps(year),
-    makePublicationsProps(year),
-    makeGraduateStudentSupportFTEProps(year),
-    makeGraduatesProps(year),
-    makeTDDProps(year),
-    makeAdmissionsProps(year),
-    makeCourseEvaluationOneProps(year),
-    makeCourseEvaluationTwoProps(year),
-    makeExitSurveyProps(year),
-    makeStakeholderSurveyProps(year),
-    makeInternshipProps(year),
-    makeUndergraduateResearchExperienceProps(year)
+    makeSSHCardProps(year, dashboardDB),
+    makeFacultyFTEProps(year, dashboardDB),
+    makeExtramuralFundingProps(year, dashboardDB),
+    makeRetentionProps(year, dashboardDB),
+    makePublicationsProps(year, dashboardDB),
+    makeGraduateStudentSupportFTEProps(year, dashboardDB),
+    makeGraduatesProps(year, dashboardDB),
+    makeTDDProps(year, dashboardDB),
+    makeAdmissionsProps(year, dashboardDB),
+    makeCourseEvaluationOneProps(year, dashboardDB),
+    makeCourseEvaluationTwoProps(year, dashboardDB),
+    makeExitSurveyProps(year, dashboardDB),
+    makeStakeholderSurveyProps(year, dashboardDB),
+    makeInternshipProps(year, dashboardDB),
+    makeUndergraduateResearchExperienceProps(year, dashboardDB)
   ]
 }
 
 /** Displays a set of Cards, each containing an AcademicYearMeasure. */
-const AYMeasureCards: React.FunctionComponent<AYMeasureCardsProps> = ({ year }) => {
-  const cardInfo = makeCardInfo(year);
+const AYMeasureCards: React.FunctionComponent<AYMeasureCardsProps> = ({ year, dashboardDB }) => {
+  const cardInfo = makeCardInfo(year, dashboardDB);
   return (
     <Card.Group centered>
       {cardInfo.map((info, index) => <AYMeasureCard key={index} {...info}/>)}

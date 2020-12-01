@@ -11,9 +11,9 @@ interface AYTabbedContainerProps  {
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 const AYTabbedContainer: React.FunctionComponent<AYTabbedContainerProps> = ({ years, dashboardDB }) => {
-  const panes = years.map(year => { return { menuItem: `${year}`, render: () => <Tab.Pane><AYMeasureCards year={year}/></Tab.Pane>} })
+  const panes = years.map(year => { return { menuItem: `${year}`, render: () => <Tab.Pane><AYMeasureCards year={year} dashboardDB={dashboardDB}/></Tab.Pane>} })
 
-  console.log(dashboardDB); //intimacyu
+  console.log(dashboardDB);
 
   return (
     <Tab panes={panes} defaultActiveIndex={4}/>

@@ -18,91 +18,105 @@ const yearList = ['2015', '2016', '2017', '2018', '2019'];
 function makeDashboardDB(): DashboardDB {
   const dashboardDB: DashboardDB = {};
   dashboardDB[MeasureType.SSH] = {
+    name: 'SSH',
     unitType: UnitType.Number,
     description: 'Measures the amount of instruction.',
     trend: makeMeasurementTrend(1000, 1500),
     breakdowns: makeByFacultyBreakdowns()
   }
   dashboardDB[MeasureType.FACULTYFTE] = {
+    name: 'Faculty FTE',
     unitType: UnitType.Number,
     description: 'Measures the number of faculty available for teaching, research and service.',
     trend: makeMeasurementTrend(15, 20),
     breakdowns: makeByGenderEthnicityBreakdowns()
   }
   dashboardDB[MeasureType.EXTRAMURALFUNDING] = {
+    name: 'Extramural Funding',
     unitType: UnitType.Dollars,
     description: 'Measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole) for this AY',
     trend: makeMeasurementTrend(2000000, 3000000),
     breakdowns: makeByFacultyBreakdowns()
   }
   dashboardDB[MeasureType.RETENTION] = {
+    name: 'Retention',
     unitType: UnitType.Percent,
     description: 'Measures the percentage of students entering the academic program who receive a degree in it.',
     trend: makeMeasurementTrend(20, 30),
     breakdowns: makeByGenderEthnicityBreakdowns()
   }
   dashboardDB[MeasureType.PUBLICATIONS] = {
+    name: 'Publications',
     unitType: UnitType.Number,
     description: 'Measures the number of published scholarly works.',
     trend: makeMeasurementTrend(20, 30),
     breakdowns: makeByPublicationQualityBreakdowns()
   }
   dashboardDB[MeasureType.GRADUATESTUDENTSUPPORTFTE] = {
+    name: 'Graduate Student Support FTE',
     unitType: UnitType.Number,
     description: 'Measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.',
     trend: makeMeasurementTrend(100, 200, 10),
     breakdowns: makeByFacultyBreakdowns()
   }
   dashboardDB[MeasureType.GRADUATES] = {
+    name: 'Graduates',
     unitType: UnitType.Number,
     description: 'Measures the number of students receiving a degree.',
     trend: makeMeasurementTrend(100, 200),
     breakdowns: makeByGenderEthnicityBreakdowns()
   }
   dashboardDB[MeasureType.TIMETODEGREE] = {
+    name: 'Time to Degree',
     unitType: UnitType.Number,
     description: 'Measures the number of semesters required by this year\'s graduates to obtain their undergraduate degree.',
     trend: makeMeasurementTrend(70, 100, 10),
     breakdowns: makeByNumberSemesterBreakdowns()
   }
   dashboardDB[MeasureType.ADMISSIONS] = {
+    name: 'Admissions',
     unitType: UnitType.Number,
     description: 'Measures the number of students admitted.',
     trend: makeMeasurementTrend(70, 100),
     breakdowns: makeByDegreeProgramBreakdowns()
   }
   dashboardDB[MeasureType.COURSEEVALUATIONRESPONSE] = {
+    name: 'Course Evaluation Response',
     unitType: UnitType.Number,
     description: 'Measures responses to: "As a professional student, I found this course attractive and compatible with my work life."',
     trend: makeMeasurementTrend(30, 50, 10),
     breakdowns: makeCourseEvaluationResponseBreakdowns()
   }
-  return dashboardDB;
   dashboardDB[MeasureType.COURSEEVALUATIONRESPONSE2] = {
+    name: 'Course Evaluation Response',
     unitType: UnitType.Number,
     description: 'Measures responses to: "This course provided opportunities for me to improve my software development skills"',
     trend: makeMeasurementTrend(30, 50, 10),
     breakdowns: makeCourseEvaluationResponseBreakdowns()
   }
   dashboardDB[MeasureType.EXITSURVEYRESPONSE] = {
+    name: 'Exit Survey Response',
     unitType: UnitType.Percent,
     description: 'Measures responses to: "If you could start your higher education experience over, would you still attend this program?',
     trend: makeMeasurementTrend(40, 60),
     breakdowns: makeExitSurveyResponseBreakdowns()
   }
   dashboardDB[MeasureType.STAKEHOLDERSURVEYRESPONSE] = {
+    name: 'Stakeholder Survey Response',
     unitType: UnitType.Number,
     description: 'Measures responses to: "I am satisfied with the quality of graduates from this program."',
     trend: makeMeasurementTrend(30, 50, 10),
     breakdowns: makeStakeholderSurveyResponseBreakdowns()
   }
   dashboardDB[MeasureType.INTERNSHIP] = {
+    name: 'Internship',
     unitType: UnitType.Percent,
     description: 'Measures percentage of this year\'s graduates who participated in an internship program.',
     trend: makeMeasurementTrend(30, 50),
     breakdowns: makeInternshipBreakdowns()
   }
   dashboardDB[MeasureType.UNDERGRADRESEARCHEXPERIENCE] = {
+    name: 'Undergraduate Research Experience',
     unitType: UnitType.Percent,
     description: 'Measures percentage of this year\'s graduates who participated in an undergraduate research experience.',
     trend: makeMeasurementTrend(40, 60),
@@ -117,7 +131,7 @@ function makeUndergraduateResearchExperienceBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeUndergraduateResearchExperienceMeasurements();
   }
-  breakdowns[BreakdownType.UNDERGRADUATERESEARCHEXPERIENCE] = { description: 'By funding', trend: trend };
+  breakdowns[BreakdownType.UNDERGRADUATERESEARCHEXPERIENCE] = { description: 'By funding', chartType: ChartType.PieSpark, trend: trend };
   return breakdowns;
 }
 
@@ -127,7 +141,7 @@ function makeInternshipBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeInternshipMeasurements();
   }
-  breakdowns[BreakdownType.INTERNSHIP] = { description: 'By location', trend: trend };
+  breakdowns[BreakdownType.INTERNSHIP] = { description: 'By location', chartType: ChartType.PieSpark, trend: trend };
   return breakdowns;
 }
 
@@ -137,7 +151,7 @@ function makeStakeholderSurveyResponseBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeStakeholderSurveyMeasurements();
   }
-  breakdowns[BreakdownType.STAKEHOLDERSURVEY] = { description: 'By satisfaction', trend: trend };
+  breakdowns[BreakdownType.STAKEHOLDERSURVEY] = { description: 'By satisfaction', chartType: ChartType.LabeledBarSpark, trend: trend };
   return breakdowns;
 }
 
@@ -147,7 +161,7 @@ function makeExitSurveyResponseBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeExitSurveyMeasurements();
   }
-  breakdowns[BreakdownType.EXITSURVEY] = { description: 'By response', trend: trend };
+  breakdowns[BreakdownType.EXITSURVEY] = { description: 'By response', chartType: ChartType.LabeledBarSpark, trend: trend };
   return breakdowns;
 }
 
@@ -157,7 +171,7 @@ function makeCourseEvaluationResponseBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeCourseEvaluationMeasurements();
   }
-  breakdowns[BreakdownType.COURSEEVALUATION] = { description: 'By agreement', trend: trend };
+  breakdowns[BreakdownType.COURSEEVALUATION] = { description: 'By agreement', chartType: ChartType.LabeledBarSpark, trend: trend };
   return breakdowns;
 }
 
@@ -167,7 +181,7 @@ function makeByPublicationQualityBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makePublicationQualityMeasurements();
   }
-  breakdowns[BreakdownType.PUBLICATIONTIER] = { description: 'By publication quality', trend: trend };
+  breakdowns[BreakdownType.PUBLICATIONTIER] = { description: 'By publication quality', chartType: ChartType.LabeledBarSpark, trend: trend };
   return breakdowns;
 }
 
@@ -177,7 +191,7 @@ function makeByDegreeProgramBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeByDegreeProgramMeasurements();
   }
-  breakdowns[BreakdownType.DEGREEPROGRAM] = { description: 'By degree program', trend: trend };
+  breakdowns[BreakdownType.DEGREEPROGRAM] = { description: 'By degree program', chartType: ChartType.LabeledBarSpark, trend: trend };
   return breakdowns;
 }
 
@@ -187,7 +201,7 @@ function makeByFacultyBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeSortedMeasurements(15, 10);
   }
-  breakdowns[BreakdownType.BYFACULTY] = { description: 'By faculty', trend: trend };
+  breakdowns[BreakdownType.BYFACULTY] = { description: 'By faculty', chartType: ChartType.BarSpark, trend: trend };
   return breakdowns;
 }
 
@@ -197,7 +211,7 @@ function makeByGenderEthnicityBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeDemographicMeasurements();
   }
-  breakdowns[BreakdownType.DEMOGRAPHIC] = { description: 'By gender, ethnicity', trend: trend };
+  breakdowns[BreakdownType.DEMOGRAPHIC] = { description: 'By gender, ethnicity', chartType: ChartType.DemographicPieSpark, trend: trend };
   return breakdowns;
 }
 
@@ -444,135 +458,7 @@ const makeByFacultyBreakdown = () => {
 const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
 const makeAYValue = (lower: number, upper: number) => Math.floor(Math.random() * (upper - lower) + lower);
 
-function makeAYMeasureCardProps(name: string, year: number, description: string, lower: number, upper: number): AYMeasureCardProps {
-  return {
-    name,
-    value: makeAYValue(lower, upper),
-    description,
-    year,
-    priorDelta: makeDelta(),
-    nextDelta: makeDelta(),
-    sparks: [makeFiveYearTrendBreakdown()]
-  }
-}
-
-function makeSSHCardProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('SSH', year, 'Measures the amount of instruction.', 1500, 2000);
-  props.sparks.push(makeByFacultyBreakdown());
-  return props;
-}
-
-function makeFacultyFTEProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Faculty FTE', year, 'Measures the number of faculty available for teaching, research and service.', 15, 20);
-  props.sparks.push(makeDemographicPieBreakdown());
-  return props;
-}
-
-function makeExtramuralFundingProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Extramural Funding', year, 'Measures the dollar amount of funding brought in by faculty to this academic unit (or the University as a whole) for this AY.', 2000000, 3000000);
-  props.unit = Units.Dollars;
-  props.sparks.push(makeByFacultyBreakdown());
-  return props;
-}
-
-function makeRetentionProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Retention', year, 'Measures the percentage of students entering the academic program who receive a degree in it.', 20, 40);
-  props.unit = Units.Percent;
-  props.sparks.push(makeDemographicPieBreakdown());
-  return props;
-}
-
-function makePublicationsProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Publications', year, 'Measures the number of published scholarly works.', 20, 40);
-  props.sparks.push(makePublicationTierBreakdown());
-  return props;
-}
-
-function makeGraduateStudentSupportFTEProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Graduate Student Support FTE', year, 'Measures the number of graduate students receiving support in the form of tuition waivers and a monthly stipend.', 120, 140);
-  props.value = props.value / 10;
-  props.sparks.push(makeByFacultyBreakdown());
-  return props;
-}
-
-function makeGraduatesProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Graduates', year, 'Measures the number of students receiving a degree.', 120, 150);
-  props.sparks.push(makeDemographicPieBreakdown());
-  return props;
-}
-
-function makeTDDProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Time To Degree', year, 'Measures the number of semesters required by this year\'s graduates to obtain their undergraduate degree.', 80, 100);
-  props.value = props.value / 10;
-  props.sparks.push(makeTimeToDegreeBreakdown());
-  return props;
-}
-
-function makeAdmissionsProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Admissions', year, 'Measures the number of students admitted this AY.', 80, 100);
-  props.sparks.push(makeAdmissionsBreakdown());
-  return props;
-}
-
-function makeCourseEvaluationOneProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Course Evaluation Response', year, 'Measures responses to: "As a professional student, I found this course attractive and compatible with my work life."', 30, 50);
-  props.value = props.value / 10;
-  props.sparks.push(makeCourseEvaluationBreakdown());
-  return props;
-}
-
-function makeCourseEvaluationTwoProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Course Evaluation Response', year, 'Measures responses to: "This course provided opportunities for me to improve my software development skills"', 30, 50);
-  props.value = props.value / 10;
-  props.sparks.push(makeCourseEvaluationBreakdown());
-  return props;
-}
-
-function makeExitSurveyProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Exit Survey Response', year, 'Measures responses to: "If you could start your higher education experience over, would you still attend this program?"', 50, 80);
-  props.unit = Units.Percent;
-  props.sparks.push(makeExitSurveyBreakdown());
-  return props;
-}
-
-function makeStakeholderSurveyProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Stakeholder Survey Response', year, 'Measures responses to: "I am satisfied with the quality of graduates from this program."', 10, 50);
-  props.value = props.value / 10;
-  props.sparks.push(makeStakeholderSurveyBreakdown());
-  return props;
-}
-
-function makeInternshipProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Internship', year, 'Measures percentage of this year\'s graduates who participated in an internship program.', 50, 90);
-  props.unit = Units.Percent;
-  props.sparks.push(makeInternshipBreakdown());
-  return props;
-}
-
-function makeUndergraduateResearchExperienceProps(year: number): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('Undergrad Research Experience', year, 'Measures percentage of this year\'s graduates who participated in an undergraduate research experience.', 50, 90);
-  props.unit = Units.Percent;
-  props.sparks.push(makeUndergraduateResearchExperienceBreakdown());
-  return props;
-}
 
 const dashboardDB = makeDashboardDB();
 
-export {
-  makeSSHCardProps,
-  makeFacultyFTEProps,
-  makeExtramuralFundingProps,
-  makeRetentionProps,
-  makePublicationsProps,
-  makeGraduateStudentSupportFTEProps,
-  makeGraduatesProps,
-  makeTDDProps,
-  makeAdmissionsProps,
-  makeCourseEvaluationOneProps,
-  makeCourseEvaluationTwoProps,
-  makeExitSurveyProps,
-  makeStakeholderSurveyProps,
-  makeInternshipProps,
-  makeUndergraduateResearchExperienceProps,
-  dashboardDB
-};
+export { dashboardDB };
