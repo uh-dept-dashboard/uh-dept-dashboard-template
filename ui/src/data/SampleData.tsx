@@ -1,5 +1,4 @@
-import {ChartType, Units} from "../Theme";
-import {AYMeasureCardProps} from "../pages/landing/AYMeasureCard";
+import {ChartType} from "../Theme";
 import {
   Breakdowns,
   DashboardDB,
@@ -131,7 +130,7 @@ function makeUndergraduateResearchExperienceBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeUndergraduateResearchExperienceMeasurements();
   }
-  breakdowns[BreakdownType.UNDERGRADUATERESEARCHEXPERIENCE] = { description: 'By funding', chartType: ChartType.PieSpark, trend: trend };
+  breakdowns[BreakdownType.UNDERGRADUATERESEARCHEXPERIENCE] = { chartTitle: 'By funding', chartType: ChartType.PieSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -141,7 +140,7 @@ function makeInternshipBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeInternshipMeasurements();
   }
-  breakdowns[BreakdownType.INTERNSHIP] = { description: 'By location', chartType: ChartType.PieSpark, trend: trend };
+  breakdowns[BreakdownType.INTERNSHIP] = { chartTitle: 'By location', chartType: ChartType.PieSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -151,7 +150,7 @@ function makeStakeholderSurveyResponseBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeStakeholderSurveyMeasurements();
   }
-  breakdowns[BreakdownType.STAKEHOLDERSURVEY] = { description: 'By satisfaction', chartType: ChartType.LabeledBarSpark, trend: trend };
+  breakdowns[BreakdownType.STAKEHOLDERSURVEY] = { chartTitle: 'By satisfaction', chartType: ChartType.LabeledBarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -161,7 +160,7 @@ function makeExitSurveyResponseBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeExitSurveyMeasurements();
   }
-  breakdowns[BreakdownType.EXITSURVEY] = { description: 'By response', chartType: ChartType.LabeledBarSpark, trend: trend };
+  breakdowns[BreakdownType.EXITSURVEY] = { chartTitle: 'By response', chartType: ChartType.LabeledBarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -171,7 +170,7 @@ function makeCourseEvaluationResponseBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeCourseEvaluationMeasurements();
   }
-  breakdowns[BreakdownType.COURSEEVALUATION] = { description: 'By agreement', chartType: ChartType.LabeledBarSpark, trend: trend };
+  breakdowns[BreakdownType.COURSEEVALUATION] = { chartTitle: 'By agreement', chartType: ChartType.LabeledBarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -181,7 +180,7 @@ function makeByPublicationQualityBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makePublicationQualityMeasurements();
   }
-  breakdowns[BreakdownType.PUBLICATIONTIER] = { description: 'By publication quality', chartType: ChartType.LabeledBarSpark, trend: trend };
+  breakdowns[BreakdownType.PUBLICATIONTIER] = { chartTitle: 'By publication quality', chartType: ChartType.LabeledBarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -191,7 +190,7 @@ function makeByDegreeProgramBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeByDegreeProgramMeasurements();
   }
-  breakdowns[BreakdownType.DEGREEPROGRAM] = { description: 'By degree program', chartType: ChartType.LabeledBarSpark, trend: trend };
+  breakdowns[BreakdownType.DEGREEPROGRAM] = { chartTitle: 'By degree program', chartType: ChartType.LabeledBarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -201,7 +200,7 @@ function makeByFacultyBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeSortedMeasurements(15, 10);
   }
-  breakdowns[BreakdownType.BYFACULTY] = { description: 'By faculty', chartType: ChartType.BarSpark, trend: trend };
+  breakdowns[BreakdownType.BYFACULTY] = { chartTitle: 'By faculty', chartType: ChartType.BarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -211,7 +210,7 @@ function makeByGenderEthnicityBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeDemographicMeasurements();
   }
-  breakdowns[BreakdownType.DEMOGRAPHIC] = { description: 'By gender, ethnicity', chartType: ChartType.DemographicPieSpark, trend: trend };
+  breakdowns[BreakdownType.DEMOGRAPHIC] = { chartTitle: 'By gender, ethnicity', chartType: ChartType.DemographicPieSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -221,7 +220,7 @@ function makeByNumberSemesterBreakdowns(): Breakdowns {
   for (const year of yearList) {
     trend[year] = makeByNumberSemesterMeasurements();
   }
-  breakdowns[BreakdownType.NUMBERSEMESTERS] = { description: 'By number of semesters', trend: trend };
+  breakdowns[BreakdownType.NUMBERSEMESTERS] = { chartTitle: 'By number of semesters', chartType: ChartType.LabeledBarSpark, chartData: trend };
   return breakdowns;
 }
 
@@ -351,97 +350,6 @@ function makeSortedMeasurements(num: number, range = 101): Measurement[] {
   return data;
 }
 
-const makeDemographicPieBreakdown = () => {
-  const women = Math.floor(Math.random() * 20) + 3;
-  const men = 100 - women;
-  const data = [];
-  data.push({value: women, label: 'Women'});
-  data.push({value: men, label: 'Men'});
-  const caucasian = 50 + Math.floor(Math.random() * 20);
-  const nativeHawaiian = Math.floor(Math.random() * 10);
-  const other = 100 - caucasian - nativeHawaiian;
-  data.push({value: caucasian, label: 'Caucasian'});
-  data.push({value: nativeHawaiian, label: 'Native Hawaiian'});
-  data.push({value: other, label: 'Other'});
-  return {chartType: ChartType.DemographicPieSpark, chartTitle: 'Breakdown by gender, ethnicity', chartData: data}
-}
-
-const makeInternshipBreakdown = () => {
-  const data = [];
-  const hawaii = 50 + Math.floor(Math.random() * 20);
-  const mainland = Math.floor(Math.random() * 10);
-  const other = 100 - hawaii - mainland;
-  data.push({value: hawaii, label: 'Hawaii'});
-  data.push({value: mainland, label: 'Mainland'});
-  data.push({value: other, label: 'Other'});
-  return {chartType: ChartType.PieSpark, chartTitle: 'Breakdown by location', chartData: data}
-}
-
-const makeUndergraduateResearchExperienceBreakdown = () => {
-  const data = [];
-  const urop = 50 + Math.floor(Math.random() * 20);
-  const faculty = Math.floor(Math.random() * 10);
-  const unfunded = 100 - urop - faculty;
-  data.push({value: urop, label: 'UROP'});
-  data.push({value: faculty, label: 'Faculty'});
-  data.push({value: unfunded, label: 'Unfunded'});
-  return {chartType: ChartType.PieSpark, chartTitle: 'Breakdown by funding', chartData: data}
-}
-
-const makePublicationTierBreakdown = () => {
-  const data = [];
-  data.push({value: Math.floor(Math.random() * 100), label: 'Tier 1'});
-  data.push({value: Math.floor(Math.random() * 100), label: 'Tier 2'});
-  data.push({value: Math.floor(Math.random() * 100), label: 'Other'});
-  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by publication quality', chartData: data}
-}
-
-const makeTimeToDegreeBreakdown = () => {
-  const data = [];
-  data.push({value: 2, label: '< 6'});
-  data.push({value: Math.floor(Math.random() * 10), label: '6-8'});
-  data.push({value: Math.floor(Math.random() * 10), label: '8-10'});
-  data.push({value: Math.floor(Math.random() * 10), label: '10-12'});
-  data.push({value: 2, label: '12+'});
-  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by number of semesters', chartData: data}
-}
-
-const makeAdmissionsBreakdown = () => {
-  const data = [];
-  data.push({value: Math.floor(Math.random() * 100), label: 'B.A.'});
-  data.push({value: Math.floor(Math.random() * 100), label: 'B.S.'});
-  data.push({value: Math.floor(Math.random() * 50), label: 'M.S.'});
-  data.push({value: Math.floor(Math.random() * 50), label: 'Ph.D.'});
-  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by degree program', chartData: data}
-}
-
-const makeCourseEvaluationBreakdown = () => {
-  const data = [];
-  data.push({value: Math.floor(Math.random() * 100), label: 'Disagree'});
-  data.push({value: Math.floor(Math.random() * 100), label: ''});
-  data.push({value: Math.floor(Math.random() * 100), label: ''});
-  data.push({value: Math.floor(Math.random() * 50), label: ''});
-  data.push({value: Math.floor(Math.random() * 50), label: 'Agree'});
-  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by agreement', chartData: data}
-}
-
-const makeExitSurveyBreakdown = () => {
-  const data = [];
-  data.push({value: Math.floor(Math.random() * 100), label: 'UH'});
-  data.push({value: Math.floor(Math.random() * 80), label: 'Another school'});
-  data.push({value: Math.floor(Math.random() * 50), label: 'No school'});
-  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by response', chartData: data}
-}
-
-const makeStakeholderSurveyBreakdown = () => {
-  const data = [];
-  data.push({value: Math.floor(Math.random() * 50), label: 'Unsatisfied'});
-  data.push({value: Math.floor(Math.random() * 100), label: ''});
-  data.push({value: Math.floor(Math.random() * 100), label: ''});
-  data.push({value: Math.floor(Math.random() * 50), label: ''});
-  data.push({value: Math.floor(Math.random() * 50), label: 'Satisfied'});
-  return {chartType: ChartType.LabeledBarSpark, chartTitle: 'Breakdown by satisfaction', chartData: data}
-}
 
 const makeFiveYearTrendBreakdown = () => {
   return {

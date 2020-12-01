@@ -1,6 +1,6 @@
 import {AYMeasureCardProps} from "./AYMeasureCard";
-import {Units} from "../../Theme";
-import {DashboardDB} from "../../DataTypes";
+import {ChartType, Units} from "../../Theme";
+import {DashboardDB, MeasureType} from "../../DataTypes";
 
 const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
 
@@ -17,9 +17,18 @@ function makeAYMeasureCardProps(name: string, year: number, description: string,
 }
 
 function makeSSHCardProps(year: number, dashboardDB: DashboardDB): AYMeasureCardProps {
-  const props = makeAYMeasureCardProps('SSH', year, 'Measures the amount of instruction.', 1500, 2000);
-  props.sparks.push(makeByFacultyBreakdown());
-  return props;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const sshData = dashboardDB[MeasureType.SSH]!;
+  const name = sshData.name;
+  const value = sshData.trend[year];
+  const description = sshData.description;
+  const priorDelta = makeDelta();
+  const nextDelta = makeDelta();
+  const fiveYearTrend = { chartType: ChartType.LineSpark, chartTitle: 'Five year trend', chartData: sshData.trend };
+  const sparks = [fiveYearTrend];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  sparks.push(sshData.breakdowns.BYFACULTY!);
+  return { name, value, description, year, priorDelta, nextDelta, sparks }
 }
 
 function makeFacultyFTEProps(year: number): AYMeasureCardProps {
