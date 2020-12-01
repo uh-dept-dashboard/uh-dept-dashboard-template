@@ -66,8 +66,8 @@ type MeasureTrend = {
 }
 
 /**
- * Breakdowns also have a "trend", but a breakdown consists of a set of Measurements. Label is typically required, or
- * the order of occurrence in the array is significant.
+ * Breakdowns also have a "trend", but a breakdown trend has a set of Measurements per year.
+ * Label is typically required, or the order of occurrence in the array of Measurements is significant.
  * Example: { 2015: [{value: 33, label: 'Male'}, {value: 70, label: 'Female'}], ...}
  */
 type BreakdownTrend = {
@@ -75,21 +75,13 @@ type BreakdownTrend = {
 }
 
 /**
- * Provides the description of a Breakdown, plus the data associated with it.
- * Example: { description: 'Diversity', trend: { 2015: [{value: 33, label: 'Male'}, {value: 70, label: 'Female'}], ...}}
+ * Provides the title, type, and data (over five years) for a Breakdown Chart.
+ * Example: { chartType: 'BarSpark', chartTitle: 'By gender, ethnicity', chartData: { 2015: [{value: 33, label: 'Male'}, {value: 70, label: 'Female'}], ...}}
  */
-interface BreakdownInfo {
+interface BreakdownChart {
   chartType: ChartType,
   chartTitle: string,
   chartData: BreakdownTrend
-}
-
-/**
- * Provides all Breakdowns associated with a given Measure.
- * Example: { BYFACULTY: { description: 'By faculty', trend: ...}, DIVERSITY: { description: ...}, ...}
- */
-type Breakdowns = {
-  [breakdownType in BreakdownType]?: BreakdownInfo
 }
 
 /**
@@ -100,11 +92,12 @@ type Breakdowns = {
  *      unitType: 'Number',
  *      description: 'Measures the amount of instruction.'
  *      trend: { 2015: {value: 23}, 2016: {value: 24}, 2017: {value: 25}, 2018: {value: 26}, 2019: {value: 27}},
- *      breakdowns: {
- *        BYFACULTY: { description: 'Measures the number of faculty available for teaching, research and service.',
- *                     chartType: 'DemographicPieSpark',
- *                     trend: { 2015: [{value: 2}, {value: 3}, {value: 4}, {value: 6}], 2016: [{value: 45} ... ] } }
- *      }
+ *      breakdowns: [
+ *        { chartTitle: 'By gender, ethnicity',
+ *          chartType: 'DemographicPieSpark',
+ *          chartData: { 2015: [{value: 2}, {value: 3}, {value: 4}, {value: 6}], 2016: [{value: 45} ... ] }
+ *        }
+ *      ]
  *    }
  *  }*
  */
@@ -114,11 +107,11 @@ type DashboardDB = {
     unitType: UnitType,
     description: string,
     trend: MeasureTrend,
-    breakdowns: Breakdowns
+    breakdowns: BreakdownChart[]
   }
 }
 
-export type { MeasureTrend, Measurement, DashboardDB, Breakdowns, BreakdownTrend } ;
+export type { MeasureTrend, Measurement, DashboardDB, BreakdownTrend, BreakdownChart } ;
 export { UnitType, MeasureType, BreakdownType };
 
 

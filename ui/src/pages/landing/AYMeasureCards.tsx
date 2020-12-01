@@ -2,20 +2,8 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import AYMeasureCard, {AYMeasureCardProps} from "./AYMeasureCard";
-import {
-  makeAdmissionsProps,
-  makeCourseEvaluationOneProps,
-  makeCourseEvaluationTwoProps, makeExitSurveyProps,
-  makeExtramuralFundingProps,
-  makeFacultyFTEProps,
-  makeGraduatesProps,
-  makeGraduateStudentSupportFTEProps, makeInternshipProps,
-  makePublicationsProps,
-  makeRetentionProps,
-  makeSSHCardProps, makeStakeholderSurveyProps,
-  makeTDDProps, makeUndergraduateResearchExperienceProps
-} from "../../data/SampleData";
 import {DashboardDB} from "../../DataTypes";
+import {makeSSHCardProps} from "./AYMeasureCardProps";
 
 interface AYMeasureCardsProps {
   year: number,
@@ -25,20 +13,6 @@ interface AYMeasureCardsProps {
 function makeCardInfo(year: number, dashboardDB: DashboardDB) : AYMeasureCardProps[] {
   return [
     makeSSHCardProps(year, dashboardDB),
-    makeFacultyFTEProps(year, dashboardDB),
-    makeExtramuralFundingProps(year, dashboardDB),
-    makeRetentionProps(year, dashboardDB),
-    makePublicationsProps(year, dashboardDB),
-    makeGraduateStudentSupportFTEProps(year, dashboardDB),
-    makeGraduatesProps(year, dashboardDB),
-    makeTDDProps(year, dashboardDB),
-    makeAdmissionsProps(year, dashboardDB),
-    makeCourseEvaluationOneProps(year, dashboardDB),
-    makeCourseEvaluationTwoProps(year, dashboardDB),
-    makeExitSurveyProps(year, dashboardDB),
-    makeStakeholderSurveyProps(year, dashboardDB),
-    makeInternshipProps(year, dashboardDB),
-    makeUndergraduateResearchExperienceProps(year, dashboardDB)
   ]
 }
 
