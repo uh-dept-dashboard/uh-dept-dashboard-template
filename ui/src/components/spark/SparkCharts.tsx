@@ -1,15 +1,14 @@
 import React from 'react';
-import {LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, Dot, DotProps} from 'recharts';
+import {LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, Dot, DotProps, Tooltip} from 'recharts';
 import {theme} from '../../Theme';
 
 interface SparkProps {
   data: { value: number, label?: string, year?: number }[]
 }
 
-function customDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<Dot> & Readonly<DotProps> & Readonly<{ children?: React.ReactNode; }>) {
-  console.log(dotProps);
+function trendLineSparkDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<Dot> & Readonly<DotProps> & Readonly<{ children?: React.ReactNode; }>) {
   // @ts-ignore
-  if (dotProps.payload.year && dotProps.payload.year === 2019) {
+  if (dotProps.payload.year === dotProps.payload.tabYear) {
     // @ts-ignore
     dotProps.stroke = 'red';
     // @ts-ignore
@@ -18,10 +17,11 @@ function customDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttribu
   return <Dot {...dotProps}/>
 }
 
-const LineSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
+const TrendLineSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <LineChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
-      <Line isAnimationActive={false} type='monotone' dataKey='value' stroke={theme.color.green} strokeWidth={2} dot={customDot} />
+      <Line isAnimationActive={false} type='monotone' dataKey='value' stroke={theme.color.green} strokeWidth={2} dot={trendLineSparkDot} />
+      <Tooltip />
     </LineChart>
   )
 }
@@ -63,4 +63,4 @@ const DemographicPieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
 }
 
 export type { SparkProps };
-export { LineSpark, BarSpark, PieSpark, DemographicPieSpark, LabeledBarSpark };
+export { TrendLineSpark, BarSpark, PieSpark, DemographicPieSpark, LabeledBarSpark };

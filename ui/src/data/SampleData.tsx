@@ -11,7 +11,7 @@ import {
 
 const endYear = 2019;
 const startYear = endYear - 4;
-const yearList = ['2015', '2016', '2017', '2018', '2019'];
+const yearList = [2015, 2016, 2017, 2018, 2019];
 
 function makeDashboardDB(): DashboardDB {
   const dashboardDB: DashboardDB = {};
@@ -301,7 +301,7 @@ function makeMeasurementTrend(lower: number, upper: number, divisor = 1): Measur
  for (const year of yearList) {
    let value = Math.floor(Math.random() * (upper - lower) + lower);
    value = value / divisor;
-   trend[year] = { value };
+   trend[year] = { value, year };
  }
  return trend;
 }
@@ -321,6 +321,12 @@ function makeSortedMeasurements(num: number, range = 101): Measurement[] {
   return data;
 }
 
+function logDashboardDB(dashboardDB: DashboardDB) {
+  // @ts-ignore
+  console.log('dashboardDB', dashboardDB);
+}
+
 const dashboardDB = makeDashboardDB();
+logDashboardDB(dashboardDB);
 
 export { dashboardDB };

@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import {ChartType } from '../../Theme';
-import {LineSpark, BarSpark, DemographicPieSpark, LabeledBarSpark, PieSpark} from '../../components/spark/SparkCharts';
+import {TrendLineSpark, BarSpark, DemographicPieSpark, LabeledBarSpark, PieSpark} from '../../components/spark/SparkCharts';
 import {UnitType} from "../../DataTypes";
 
 interface SparkDataSet {
@@ -71,7 +71,7 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
         <Card.Description style={{paddingTop: '10px', minHeight: '75px'}}>{description}</Card.Description>
         { sparks ? sparks.map((data, index) => <div key={index} style={{paddingTop: '10px'}}>
           <Card.Description textAlign='center'>{data.chartTitle}</Card.Description>
-          { (data.chartType === ChartType.LineSpark) ? <LineSpark data={data.chartData} /> : ''}
+          { (data.chartType === ChartType.TrendLineSpark) ? <TrendLineSpark data={data.chartData} /> : ''}
           { (data.chartType === ChartType.BarSpark) ? <BarSpark data={data.chartData} /> : ''}
           { (data.chartType === ChartType.PieSpark) ? <div style={{paddingTop: '10px'}}><PieSpark data={data.chartData} /></div> : ''}
           { (data.chartType === ChartType.DemographicPieSpark) ? <div style={{paddingTop: '10px'}}><DemographicPieSpark data={data.chartData} /></div> : ''}

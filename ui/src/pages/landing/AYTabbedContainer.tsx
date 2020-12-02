@@ -14,8 +14,6 @@ const AYTabbedContainer: React.FunctionComponent<AYTabbedContainerProps> = ({ la
   const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear - 1, latestYear ];
   const panes = years.map(year => { return { menuItem: `${year}`, render: () => <Tab.Pane><AYMeasureCards latestYear={latestYear} year={year} dashboardDB={dashboardDB}/></Tab.Pane>} })
 
-  console.log(dashboardDB);
-
   return (
     <Tab panes={panes} defaultActiveIndex={4}/>
   );

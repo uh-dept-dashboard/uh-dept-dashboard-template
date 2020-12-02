@@ -19,7 +19,7 @@ class Theme {
 const theme = new Theme();
 
 enum ChartType {
-  LineSpark = 'LineSpark',
+  TrendLineSpark = 'TrendLineSpark',
   BarSpark = 'BarSpark',
   PieSpark = 'PieSpark',
   DemographicPieSpark = 'DemographicPieSpark',

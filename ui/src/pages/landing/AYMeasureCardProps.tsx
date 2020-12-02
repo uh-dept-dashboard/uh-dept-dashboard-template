@@ -14,11 +14,14 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   const unit = measureData.unitType;
   const priorDelta = makeDelta();
   const nextDelta = makeDelta();
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear -1, latestYear];
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const trendData = years.map(year => measureData.trend[`${year}`]!);
-  const fiveYearTrend = { chartType: ChartType.LineSpark, chartTitle: 'Five year trend', chartData: trendData };
+  const trendData = years.map(year => measureData.trend[`${year}`]!); // convert to ordered list of Measures.
+  for (const measure of trendData) {
+    // @ts-ignore
+    measure['tabYear'] = year;
+  }
+  const fiveYearTrend = { chartType: ChartType.TrendLineSpark, chartTitle: 'Five year trend', chartData: trendData };
   const breakdownChart = measureData.breakdowns[0];
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const breakdownSpark = {chartType: breakdownChart.chartType, chartTitle: breakdownChart.chartTitle, chartData: breakdownChart.chartData[year]!};
