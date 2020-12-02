@@ -61,6 +61,7 @@ const DemographicPieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
     <PieChart width={theme.chartWidth} height={theme.chartHeight} >
       <Pie data={data1} dataKey='value' label={(entry) => entry.label} fill={theme.color.green} isAnimationActive={false} cx={theme.chartWidth/4} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} />
       <Pie data={data2} dataKey='value' fill={theme.color.green} isAnimationActive={false} cx={(theme.chartWidth * 4)/5} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} label={(entry) => entry.label}/>
+      <Tooltip/>
     </PieChart>
   )
 }
