@@ -3,6 +3,7 @@ import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
 import {ChartType, Units} from '../../Theme';
 import {LineSpark, BarSpark, DemographicPieSpark, LabeledBarSpark, PieSpark} from '../../components/spark/SparkCharts';
+import {UnitType} from "../../DataTypes";
 
 interface SparkDataSet {
   chartType: ChartType,
@@ -20,7 +21,7 @@ interface AYMeasureCardProps {
   priorDelta?: number,
   nextDelta?: number,
   sparks: Array<SparkDataSet>,
-  unit?: Units
+  unit?: UnitType
 }
 
 const formatNumber = (num: number) => {
@@ -39,9 +40,9 @@ const formatNumber = (num: number) => {
 const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value, priorDelta, nextDelta, unit, sparks}) => {
   let formattedValue = formatNumber(value);
   if (unit)
-    if (unit === Units.Percent) {
+    if (unit === UnitType.Percent) {
       formattedValue = `${formattedValue}%`;
-    } else if (unit === Units.Dollars) {
+    } else if (unit === UnitType.Dollars) {
       formattedValue = `$${formattedValue}`;
     }
   const formattedPriorDelta = (priorDelta && priorDelta < 0) ? `${priorDelta}` : `+${priorDelta}`;

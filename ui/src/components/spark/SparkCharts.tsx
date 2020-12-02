@@ -7,6 +7,7 @@ interface SparkProps {
 }
 
 function customDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<Dot> & Readonly<DotProps> & Readonly<{ children?: React.ReactNode; }>) {
+  console.log(dotProps);
   // @ts-ignore
   if (dotProps.payload.year && dotProps.payload.year === 2019) {
     // @ts-ignore

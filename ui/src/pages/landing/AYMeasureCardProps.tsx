@@ -11,6 +11,7 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const value = measureData.trend[year]!.value!;
   const description = measureData.description;
+  const unit = measureData.unitType;
   const priorDelta = makeDelta();
   const nextDelta = makeDelta();
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -22,7 +23,7 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const breakdownSpark = {chartType: breakdownChart.chartType, chartTitle: breakdownChart.chartTitle, chartData: breakdownChart.chartData[year]!};
   const sparks = [fiveYearTrend, breakdownSpark];
-  return { latestYear, name, value, description, year, priorDelta, nextDelta, sparks }
+  return { latestYear, name, value, description, unit, year, priorDelta, nextDelta, sparks }
 }
 
 export {makeCardProps};
