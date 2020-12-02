@@ -19,14 +19,14 @@ function makeDashboardDB(): DashboardDB {
     name: 'SSH',
     unitType: UnitType.Number,
     description: 'Measures the amount of instruction.',
-    trend: makeMeasurementTrend(1000, 1500),
+    trend: makeMeasurementTrend(1000, 3000),
     breakdowns: makeByFacultyBreakdowns()
   }
   dashboardDB[MeasureType.FACULTYFTE] = {
     name: 'Faculty FTE',
     unitType: UnitType.Number,
     description: 'Measures the number of faculty available for teaching, research and service.',
-    trend: makeMeasurementTrend(15, 20),
+    trend: makeMeasurementTrend(15, 25),
     breakdowns: makeByGenderEthnicityBreakdowns()
   }
   dashboardDB[MeasureType.EXTRAMURALFUNDING] = {
@@ -307,14 +307,6 @@ function makeMeasurementTrend(lower: number, upper: number, divisor = 1): Measur
 }
 
 
-function makeRandomMeasurements(num: number, range = 101): Measurement[] {
-  const data = [];
-  for (let i = 0; i < num; i++) {
-    data.push({value: Math.floor(Math.random() * range), year: startYear + i});
-  }
-  return data;
-}
-
 function makeSortedMeasurements(num: number, range = 101): Measurement[] {
   let data = [];
   for (let i = 0; i < num; i++) {
@@ -328,23 +320,6 @@ function makeSortedMeasurements(num: number, range = 101): Measurement[] {
   }
   return data;
 }
-
-
-const makeFiveYearTrendBreakdown = () => {
-  return {
-    chartType: ChartType.LineSpark,
-    chartTitle: 'Five year trend',
-    chartData: makeRandomMeasurements(5)
-  }
-}
-
-const makeByFacultyBreakdown = () => {
-  return {chartType: ChartType.BarSpark, chartTitle: 'By faculty', chartData: makeSortedMeasurements(15, 10)}
-}
-
-const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
-const makeAYValue = (lower: number, upper: number) => Math.floor(Math.random() * (upper - lower) + lower);
-
 
 const dashboardDB = makeDashboardDB();
 

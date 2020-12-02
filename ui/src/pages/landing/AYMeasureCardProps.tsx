@@ -14,7 +14,7 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   const priorDelta = makeDelta();
   const nextDelta = makeDelta();
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear -1];
+  const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear -1, latestYear];
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const trendData = years.map(year => measureData.trend[`${year}`]!);
   const fiveYearTrend = { chartType: ChartType.LineSpark, chartTitle: 'Five year trend', chartData: trendData };
