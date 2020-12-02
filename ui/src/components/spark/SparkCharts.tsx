@@ -30,6 +30,7 @@ const BarSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <BarChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
       <Bar dataKey='value' fill={theme.color.green}  />
+      <Tooltip />
     </BarChart>
   )
 }
@@ -39,6 +40,7 @@ const LabeledBarSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
     <BarChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
       <Bar dataKey='value' fill={theme.color.green}  />
       <XAxis dataKey='label'/>
+      <Tooltip/>
     </BarChart>
   )
 }
@@ -47,6 +49,7 @@ const PieSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <PieChart width={theme.chartWidth} height={theme.chartHeight} >
       <Pie data={data} dataKey='value' label={(entry) => entry.label} fill={theme.color.green} isAnimationActive={false} cx={theme.chartWidth/2} cy={theme.chartHeight/2} outerRadius={theme.chartHeight/4} />
+      <Tooltip/>
     </PieChart>
   )
 }

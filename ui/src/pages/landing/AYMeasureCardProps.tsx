@@ -2,7 +2,18 @@ import {AYMeasureCardProps} from "./AYMeasureCard";
 import {ChartType} from "../../Theme";
 import {DashboardDB, MeasureType} from "../../DataTypes";
 
-const makeDelta = () => Math.floor(Math.random() * (30 - 20)) + 20;
+function computeDelta(year: number, dashboardDB: DashboardDB, measureType: MeasureType, offset: number) {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const measureData = dashboardDB[measureType]!;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const currValue = measureData.trend[year]!.value!;
+  if (measureData.trend[`${year + offset}`]) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const priorValue = measureData.trend[`${year + offset}`]!.value;
+    return Math.floor(((priorValue - currValue) / currValue) * 100);
+  }
+  return 0;
+}
 
 function makeCardProps(measureType: MeasureType, latestYear: number, year: number, dashboardDB: DashboardDB): AYMeasureCardProps {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -12,8 +23,8 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   const value = measureData.trend[year]!.value!;
   const description = measureData.description;
   const unit = measureData.unitType;
-  const priorDelta = makeDelta();
-  const nextDelta = makeDelta();
+  const priorDelta = computeDelta(year, dashboardDB, measureType, -1);
+  const nextDelta = computeDelta(year, dashboardDB, measureType, 1);
   const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear -1, latestYear];
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const trendData = years.map(year => measureData.trend[`${year}`]!); // convert to ordered list of Measures.
