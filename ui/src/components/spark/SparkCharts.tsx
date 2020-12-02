@@ -8,7 +8,7 @@ interface SparkProps {
 
 function trendLineSparkDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<Dot> & Readonly<DotProps> & Readonly<{ children?: React.ReactNode; }>) {
   // @ts-ignore
-  if (dotProps.payload.year === dotProps.payload.tabYear) {
+  if (dotProps.payload.year === dotProps.payload.currYear) {
     // @ts-ignore
     dotProps.stroke = 'red';
     // @ts-ignore

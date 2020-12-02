@@ -11,8 +11,15 @@ interface AYMeasureCardsProps {
   dashboardDB: DashboardDB
 }
 
+/** Create card props only for measures that are actually computed in the DB. */
 function makeCardInfo(latestYear: number, year: number, dashboardDB: DashboardDB) : AYMeasureCardProps[] {
-  return Object.values(MeasureType).map(measure => makeCardProps(measure, latestYear, year, dashboardDB));
+  const cardPropsList = [];
+  for (const measure of Object.values(MeasureType)) {
+    if (dashboardDB[measure]) {
+      cardPropsList.push(makeCardProps(measure, latestYear, year, dashboardDB));
+    }
+  }
+  return cardPropsList;
 }
 
 /** Displays a set of Cards, each containing an AcademicYearMeasure. */

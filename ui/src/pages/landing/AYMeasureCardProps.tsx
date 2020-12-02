@@ -30,7 +30,7 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   const trendData = years.map(year => measureData.trend[`${year}`]!); // convert to ordered list of Measures.
   for (const measure of trendData) {
     // @ts-ignore
-    measure['tabYear'] = year;
+    measure['currYear'] = year;
   }
   const fiveYearTrend = { chartType: ChartType.TrendLineSpark, chartTitle: 'Five year trend', chartData: trendData };
   const breakdownChart = measureData.breakdowns[0];
