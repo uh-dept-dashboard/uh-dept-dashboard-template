@@ -18,11 +18,6 @@ class Theme {
 
 const theme = new Theme();
 
-enum Units {
-  Dollars = '$',
-  Percent = '%'
-}
-
 enum ChartType {
   LineSpark = 'LineSpark',
   BarSpark = 'BarSpark',
@@ -31,4 +26,4 @@ enum ChartType {
   LabeledBarSpark = 'LabeledBarSpark'
 }
 
-export { theme, Units, ChartType };
+export { theme, ChartType };

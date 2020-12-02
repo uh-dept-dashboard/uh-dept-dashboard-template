@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, Statistic, Grid, Icon} from 'semantic-ui-react';
 import './AYMeasureCards.css';
-import {ChartType, Units} from '../../Theme';
+import {ChartType } from '../../Theme';
 import {LineSpark, BarSpark, DemographicPieSpark, LabeledBarSpark, PieSpark} from '../../components/spark/SparkCharts';
 import {UnitType} from "../../DataTypes";
 
@@ -10,7 +10,6 @@ interface SparkDataSet {
   chartTitle: string,
   chartData: { value: number }[]
 }
-
 
 interface AYMeasureCardProps {
   latestYear: number,
