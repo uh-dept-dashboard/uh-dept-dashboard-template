@@ -3,14 +3,12 @@ import {Container} from 'semantic-ui-react';
 import AYTabbedContainer from "./AYTabbedContainer";
 import {DashboardDB} from "../../DataTypes";
 
-type LandingPageProps = {
+type AYPageProps = {
   latestYear: number
   dashboardDB: DashboardDB
 }
 
-const LandingPage: React.FunctionComponent<LandingPageProps> = ({latestYear, dashboardDB}) => {
-
-
+const AYPage: React.FunctionComponent<AYPageProps> = ({latestYear, dashboardDB}) => {
   return (
     <Container fluid style={{paddingLeft: '10px', paddingRight: '10px'}}>
       <AYTabbedContainer latestYear={latestYear} dashboardDB={dashboardDB}/>
@@ -18,4 +16,4 @@ const LandingPage: React.FunctionComponent<LandingPageProps> = ({latestYear, das
   );
 }
 
-export default LandingPage;
+export default AYPage;

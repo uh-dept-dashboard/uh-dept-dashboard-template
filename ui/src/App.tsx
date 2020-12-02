@@ -1,9 +1,11 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
 import './App.css';
 import NavBar from "./NavBar";
-import LandingPage from './pages/landing/LandingPage';
-import { DashboardDB } from "./DataTypes";
+import AYPage from './pages/academic-year/AYPage';
+import {DashboardDB} from "./DataTypes";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import TimelinePage from "./pages/timeline/Timeline";
 
 type AppProps = {
   latestYear: number,
@@ -13,13 +15,22 @@ type AppProps = {
 
 const App: React.FunctionComponent<AppProps> = ({title, latestYear, dashboardDB}) => {
   return (
-    <div>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
-      <NavBar title={title}/>
-      <LandingPage latestYear={latestYear} dashboardDB={dashboardDB}/>
-    </div>
+    <Router>
+      <div>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+        <NavBar title={title}/>
+        <Switch>
+          <Route path="/timeline">
+            <TimelinePage latestYear={latestYear} dashboardDB={dashboardDB}/>
+          </Route>
+          <Route path="/">
+            <AYPage latestYear={latestYear} dashboardDB={dashboardDB}/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
