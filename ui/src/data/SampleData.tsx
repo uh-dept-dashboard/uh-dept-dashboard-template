@@ -1,20 +1,20 @@
 import {ChartType} from "../Theme";
 import {
   BreakdownChart,
-  DashboardDB,
+  AYPageDB,
   Measurement,
   MeasureTrend,
   MeasureType,
   UnitType,
-  BreakdownTrend
+  BreakdownTrend, DashboardDB
 } from "../DataTypes";
 
 const endYear = 2019;
 const startYear = endYear - 4;
 const yearList = [2015, 2016, 2017, 2018, 2019];
 
-function makeDashboardDB(): DashboardDB {
-  const dashboardDB: DashboardDB = {};
+function makeAYPageDB(): AYPageDB {
+  const dashboardDB: AYPageDB = {};
   dashboardDB[MeasureType.SSH] = {
     name: 'SSH',
     unitType: UnitType.Number,
@@ -326,7 +326,11 @@ function logDashboardDB(dashboardDB: DashboardDB) {
   console.log('dashboardDB', dashboardDB);
 }
 
-const dashboardDB = makeDashboardDB();
+const dashboardDB: DashboardDB = {
+  ayPageDB: makeAYPageDB(),
+  timelinePageDB: {}
+};
+
 logDashboardDB(dashboardDB);
 
 export { dashboardDB };

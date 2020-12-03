@@ -23,10 +23,10 @@ const App: React.FunctionComponent<AppProps> = ({title, latestYear, dashboardDB}
         <NavBar title={title}/>
         <Switch>
           <Route path="/timeline">
-            <TimelinePage latestYear={latestYear} dashboardDB={dashboardDB}/>
+            <TimelinePage latestYear={latestYear} timelinePageDB={dashboardDB.timelinePageDB}/>
           </Route>
           <Route path="/">
-            <AYPage latestYear={latestYear} dashboardDB={dashboardDB}/>
+            <AYPage latestYear={latestYear} ayPageDB={dashboardDB.ayPageDB}/>
           </Route>
         </Switch>
       </div>

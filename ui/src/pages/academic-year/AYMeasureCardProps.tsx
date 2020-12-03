@@ -1,8 +1,8 @@
 import {AYMeasureCardProps} from "./AYMeasureCard";
 import {ChartType} from "../../Theme";
-import {DashboardDB, MeasureType} from "../../DataTypes";
+import {AYPageDB, MeasureType} from "../../DataTypes";
 
-function computeDelta(year: number, dashboardDB: DashboardDB, measureType: MeasureType, offset: number) {
+function computeDelta(year: number, dashboardDB: AYPageDB, measureType: MeasureType, offset: number) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const measureData = dashboardDB[measureType]!;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -15,7 +15,7 @@ function computeDelta(year: number, dashboardDB: DashboardDB, measureType: Measu
   return 0;
 }
 
-function makeCardProps(measureType: MeasureType, latestYear: number, year: number, dashboardDB: DashboardDB): AYMeasureCardProps {
+function makeCardProps(measureType: MeasureType, latestYear: number, year: number, dashboardDB: AYPageDB): AYMeasureCardProps {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const measureData = dashboardDB[measureType]!;
   const name = measureData.name;

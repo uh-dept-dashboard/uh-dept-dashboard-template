@@ -101,7 +101,7 @@ interface BreakdownChart {
  *    }
  *  }*
  */
-type DashboardDB = {
+type AYPageDB = {
   [measureType in MeasureType]?: {
     name: string,
     unitType: UnitType,
@@ -111,7 +111,24 @@ type DashboardDB = {
   }
 }
 
-export type { MeasureTrend, Measurement, DashboardDB, BreakdownTrend, BreakdownChart } ;
+enum TimelineType {
+  DIVERSITYTIMELINE = 'DIVERSITYTIMELINE',
+  MARKETABILITYTIMELINE = 'MARKETABILITYTIMELINE'
+}
+
+type TimelinePageDB = {
+  [timelineType in TimelineType]?: {
+    name: string,
+    data: string
+  }
+}
+
+type DashboardDB = {
+  ayPageDB: AYPageDB,
+  timelinePageDB: TimelinePageDB
+}
+
+export type { MeasureTrend, Measurement, AYPageDB, TimelinePageDB, DashboardDB, BreakdownTrend, BreakdownChart } ;
 export { UnitType, MeasureType, BreakdownType };
 
 
