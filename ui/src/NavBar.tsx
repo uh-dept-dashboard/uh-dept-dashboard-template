@@ -1,7 +1,11 @@
 import React from 'react';
-import {Menu, Image} from 'semantic-ui-react';
+import {Menu, Image, Button, Popup} from 'semantic-ui-react';
 import uhLogo from './images/uh-logo.png';
 import {NavLink} from 'react-router-dom';
+
+const PopupExample = () => (
+  <Popup content='If this button actually worked, then clicking it would download all the data in this dashboard for personal exploration.' trigger={<Button basic>Export Data</Button>} />
+)
 
 type NavBarProps =  {
   title: string
@@ -20,6 +24,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = ({ title = 'UH Dept Dashboa
       </Menu.Item>
       <Menu.Item as={NavLink} activeClassName="active" exact to="/" key='academic-year'>Academic Year View</Menu.Item>
       <Menu.Item as={NavLink} activeClassName="active" exact to="/timeline" key='timeline'>Timeline View</Menu.Item>
+      <Menu.Item><PopupExample/></Menu.Item>
     </Menu>
   );
 }
