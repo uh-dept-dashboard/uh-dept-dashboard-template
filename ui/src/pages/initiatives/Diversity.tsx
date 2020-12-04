@@ -1,7 +1,6 @@
 import React from 'react';
 import {Container, Grid, Header} from 'semantic-ui-react';
 import {TimelinePageDB} from "../../DataTypes";
-import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
 import InitiativeChart from "./InitiativeChart";
 
 /**
@@ -22,11 +21,11 @@ type DiversityPageProps = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear, timelinePageDB}) => {
   const data = [
-    {name: '2015', uv: 4000, pv: 9000},
-    {name: '2016', uv: 3000, pv: 7222},
-    {name: '2017', uv: 2000, pv: 6222},
-    {name: '2018', uv: 1223, pv: 5400},
-    {name: '2019', uv: 1890, pv: 3200},
+    {name: '2015', uv: 4000, pv: 9000, women: 37, nativehawaiians: 12},
+    {name: '2016', uv: 3000, pv: 7222, women: 47, nativehawaiians: 22},
+    {name: '2017', uv: 2000, pv: 6222, women: 57, nativehawaiians: 42},
+    {name: '2018', uv: 1223, pv: 5400, women: 67, nativehawaiians: 32},
+    {name: '2019', uv: 1890, pv: 3200, women: 77, nativehawaiians: 52},
   ];
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
