@@ -6,6 +6,20 @@ interface SparkProps {
   data: { value: number, label?: string, year?: number }[]
 }
 
+function TrendlineSparkTooltip({ payload, active }:any) {
+  if (active) {
+    console.log('payload', payload);
+    return (
+      <div className="custom-tooltip">
+        <p className="label">Year: {`${payload[0].payload.year}`}</p>
+        <p className="intro">Value: {`${payload[0].payload.value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 function trendLineSparkDot(dotProps: JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<Dot> & Readonly<DotProps> & Readonly<{ children?: React.ReactNode; }>) {
   // @ts-ignore
   if (dotProps.payload.year === dotProps.payload.currYear) {
@@ -21,7 +35,7 @@ const TrendLineSpark: React.FunctionComponent<SparkProps> = ({ data }) => {
   return (
     <LineChart width={theme.chartWidth} height={theme.chartHeight} data={data}>
       <Line isAnimationActive={false} type='monotone' dataKey='value' stroke={theme.color.green} strokeWidth={2} dot={trendLineSparkDot} />
-      <Tooltip />
+      <Tooltip content={<TrendlineSparkTooltip />}/>
     </LineChart>
   )
 }
