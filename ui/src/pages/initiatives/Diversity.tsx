@@ -20,12 +20,19 @@ type DiversityPageProps = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear, timelinePageDB}) => {
-  const data = [
-    {name: '2015', uv: 4000, pv: 9000, women: 37, nativehawaiians: 12},
-    {name: '2016', uv: 3000, pv: 7222, women: 47, nativehawaiians: 22},
-    {name: '2017', uv: 2000, pv: 6222, women: 57, nativehawaiians: 42},
-    {name: '2018', uv: 1223, pv: 5400, women: 67, nativehawaiians: 32},
-    {name: '2019', uv: 1890, pv: 3200, women: 77, nativehawaiians: 52},
+  const graduates = [
+    {name: '2015', women: 37, nativehawaiians: 12},
+    {name: '2016', women: 47, nativehawaiians: 22},
+    {name: '2017', women: 57, nativehawaiians: 42},
+    {name: '2018', women: 67, nativehawaiians: 32},
+    {name: '2019', women: 77, nativehawaiians: 52},
+  ];
+  const admitted = [
+    {name: '2015', women: 67, nativehawaiians: 18},
+    {name: '2016', women: 77, nativehawaiians: 22},
+    {name: '2017', women: 57, nativehawaiians: 24},
+    {name: '2018', women: 87, nativehawaiians: 44},
+    {name: '2019', women: 67, nativehawaiians: 33},
   ];
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
@@ -35,8 +42,8 @@ const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear,
           this academic unit. </p>
         <Grid>
           <Grid.Row centered>
-            <InitiativeChart title='Foo' data={data} dataKey='pv'/>
-            <InitiativeChart title='Bar' data={data} dataKey='uv' hideXAxis={false}/>
+            <InitiativeChart title='% Graduates' data={graduates} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>
+            <InitiativeChart title='% Admitted' data={admitted} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>
           </Grid.Row>
         </Grid>
       </div>
