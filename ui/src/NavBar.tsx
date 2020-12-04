@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu, Image, Button, Popup, Modal, Dropdown} from 'semantic-ui-react';
+import {Menu, Image, Button, Modal, Dropdown} from 'semantic-ui-react';
 import uhLogo from './images/uh-logo.png';
 import {NavLink} from 'react-router-dom';
 
@@ -39,7 +39,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = ({title = 'UH Dept Dashboar
       <Menu.Item>
         <Dropdown text="Initiatives View">
           <Dropdown.Menu>
-            <Dropdown.Item text="Diversity" as={NavLink} exact to="/timeline"/>
+            <Dropdown.Item text="Diversity" as={NavLink} exact to="/diversity"/>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>

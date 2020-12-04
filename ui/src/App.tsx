@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import AYPage from './pages/academic-year/AYPage';
 import {DashboardDB} from "./DataTypes";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import TimelinePage from "./pages/timeline/Timeline";
+import DiversityPage from "./pages/initiatives/Diversity";
 
 type AppProps = {
   latestYear: number,
@@ -22,8 +22,8 @@ const App: React.FunctionComponent<AppProps> = ({title, latestYear, dashboardDB}
         </Helmet>
         <NavBar title={title}/>
         <Switch>
-          <Route path="/timeline">
-            <TimelinePage latestYear={latestYear} timelinePageDB={dashboardDB.timelinePageDB}/>
+          <Route path="/diversity">
+            <DiversityPage latestYear={latestYear} timelinePageDB={dashboardDB.timelinePageDB}/>
           </Route>
           <Route path="/">
             <AYPage latestYear={latestYear} ayPageDB={dashboardDB.ayPageDB}/>
