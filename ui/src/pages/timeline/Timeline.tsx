@@ -2,10 +2,7 @@ import React from 'react';
 import {Container} from 'semantic-ui-react';
 import {TimelinePageDB} from "../../DataTypes";
 import {
-  Area,
-  AreaChart,
-  Brush,
-  CartesianGrid,
+  CartesianGrid, Legend,
   Line,
   LineChart,
   Tooltip,
@@ -32,33 +29,24 @@ const TimelinePage: React.FunctionComponent<TimelinePageProps> = ({latestYear, t
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
       <div>
-        <h4>A demo of synchronized LineCharts</h4>
+        <h4>A demo of asdf LineCharts</h4>
         <LineChart width={600} height={200} data={data} syncId="anyId"
-                   margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                   margin={{top: 10, right: 0, left: 0, bottom: 0}}>
           <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="name"/>
-          <YAxis/>
+          <YAxis />
           <Tooltip/>
           <Line type='monotone' dataKey='uv' stroke='#8884d8' fill='#8884d8' />
+          <Legend align='right' verticalAlign='middle' height={36} wrapperStyle={{left: '60px'}}/>
         </LineChart>
-        <p>Maybe some other content</p>
         <LineChart width={600} height={200} data={data} syncId="anyId"
-                   margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+                   margin={{top: 10, right: 0, left: 0, bottom: 0}}>
           <CartesianGrid strokeDasharray="3 3"/>
           <XAxis dataKey="name"/>
           <YAxis/>
           <Tooltip/>
           <Line type='monotone' dataKey='pv' stroke='#82ca9d' fill='#82ca9d' />
-          <Brush />
+          <Legend align='right' verticalAlign='middle' height={36} wrapperStyle={{left: '60px'}}/>
         </LineChart>
-        <AreaChart width={600} height={200} data={data} syncId="anyId"
-                   margin={{top: 10, right: 30, left: 0, bottom: 0}}>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="name"/>
-          <YAxis/>
-          <Tooltip/>
-          <Area type='monotone' dataKey='pv' stroke='#82ca9d' fill='#82ca9d' />
-        </AreaChart>
 
       </div>
     </Container>
