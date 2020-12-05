@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/uh-dept-dashboard-template/static/css/main.31060dba.chunk.css",
-    "main.js": "/uh-dept-dashboard-template/static/js/main.f069f8fd.chunk.js",
-    "main.js.map": "/uh-dept-dashboard-template/static/js/main.f069f8fd.chunk.js.map",
+    "main.js": "/uh-dept-dashboard-template/static/js/main.d20e47ff.chunk.js",
+    "main.js.map": "/uh-dept-dashboard-template/static/js/main.d20e47ff.chunk.js.map",
     "runtime-main.js": "/uh-dept-dashboard-template/static/js/runtime-main.9ae43133.js",
     "runtime-main.js.map": "/uh-dept-dashboard-template/static/js/runtime-main.9ae43133.js.map",
     "static/css/2.16faa0d9.chunk.css": "/uh-dept-dashboard-template/static/css/2.16faa0d9.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.16faa0d9.chunk.css",
     "static/js/2.f6fe146d.chunk.js",
     "static/css/main.31060dba.chunk.css",
-    "static/js/main.f069f8fd.chunk.js"
+    "static/js/main.d20e47ff.chunk.js"
   ]
 }
