@@ -1,8 +1,8 @@
 import React from 'react';
 import {Container, Grid, Header} from 'semantic-ui-react';
 import {TimelinePageDB} from "../../DataTypes";
-import InitiativeChart from "./InitiativeChart";
-import InterventionChart from "./InterventionChart";
+import InitiativeChart from "../../components/initiative-charts/InitiativeChart"
+import InterventionChart from "../../components/initiative-charts/InterventionChart";
 
 /**
  * Diversity Initiative:
@@ -54,8 +54,7 @@ const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear,
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
       <div>
         <Header as='h2'>Initiative: Diversity</Header>
-        <p>The goal of the Diversity initiative is to increase both the numbers and percentage of women graduating from
-          this academic unit. </p>
+        <p>The goal of the Diversity initiative is to increase both the numbers and percentage of women and Native Hawaiians graduating from this academic unit. </p>
         <Grid>
           <Grid.Row centered>
             <InitiativeChart title='Graduates (%)' data={graduates} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>

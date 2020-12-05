@@ -28,7 +28,7 @@ type NavBarProps = {
 const NavBar: React.FunctionComponent<NavBarProps> = ({title = 'UH Dept Dashboard'}) => {
   const menuStyle = {marginBottom: '20px'};
   return (
-    <Menu style={menuStyle} attached="top" borderless>
+    <Menu style={menuStyle} attached="top" borderless stackable>
       <Menu.Item>
         <Image size='mini' src={uhLogo}/>
       </Menu.Item>
