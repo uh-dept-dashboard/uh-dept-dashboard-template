@@ -1,7 +1,20 @@
-import {CartesianGrid, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis} from "recharts";
+import {Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
 import React from "react";
 import {Header} from "semantic-ui-react";
 import {theme} from '../../Theme';
+
+function InterventionChartTooltip({ payload, active }:any) {
+  if (active) {
+    console.log('payload', payload);
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${payload && payload[0] && payload[0].payload.intervention}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+}
 
 type InterventionChartProps = {
   data: any,
@@ -13,14 +26,12 @@ const InterventionChart: React.FunctionComponent<InterventionChartProps> = ({dat
   return (
     <div>
       <Header textAlign='center' as='h4'>{title}</Header>
-      <ScatterChart width={600} height={200} syncId="anyId" margin={{top: 0, right: 10, left: 0, bottom: 10}}>
-        <CartesianGrid strokeDasharray="3 3"/>
-        <Tooltip/>
-        <Scatter data={data} fill={green}/>
-        <XAxis type='category' dataKey='name'/>
-        <YAxis type='category' dataKey='value'/>
-        <ZAxis type='category' dataKey='intervention'/>
-      </ScatterChart>
+      <LineChart width={600} height={200} data={data} syncId="anyId" margin={{top: 0, right: 10, left: 0, bottom: 10}}>
+        <YAxis domain={[0, 2]} interval={-1}/>
+        <Tooltip content={<InterventionChartTooltip />}/>
+        <Line type='monotone' dataKey='index' stroke={green} fill={green}/>
+        <XAxis dataKey="name"/>
+      </LineChart>
     </div>
   )
 }

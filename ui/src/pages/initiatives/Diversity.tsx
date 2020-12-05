@@ -44,11 +44,11 @@ const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear,
   ];
 
   const interventions = [
-    {name: '2015', index: 1, value: 10, intervention: 'intervention1'},
-    {name: '2016', index: 2, value: 10, intervention: 'intervention2'},
-    {name: '2017', index: 3, value: 12, intervention: 'intervention3'},
-    {name: '2018', index: 4, value: 13, intervention: 'intervention4'},
-    {name: '2019', index: 5, value: 14, intervention: 'intervention5'},
+    {name: '2015', value: 10, intervention: 'intervention1'},
+    {name: '2016', index: 1, value: 10, intervention: 'Established BIPOC student group.'},
+    {name: '2017',  value: 12, intervention: 'intervention3'},
+    {name: '2018', index: 1, value: 13, intervention: 'Created Dean\'s office position for diversity'},
+    {name: '2019',  value: 14, intervention: 'intervention5'},
   ];
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
