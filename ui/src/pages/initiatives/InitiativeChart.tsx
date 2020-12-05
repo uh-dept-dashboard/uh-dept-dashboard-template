@@ -17,8 +17,7 @@ const InitiativeChart: React.FunctionComponent<InitiativeChartProps> = ({data, d
   return (
     <div>
       <Header textAlign='center' as='h4'>{title}</Header>
-      <LineChart width={600} height={200} data={data} syncId="anyId"
-                 margin={{top: 0, right: 10, left: 0, bottom: 10}}>
+      <LineChart width={600} height={200} data={data} syncId="anyId" margin={{top: 0, right: 10, left: 0, bottom: 10}}>
         <CartesianGrid strokeDasharray="3 3"/>
         <YAxis domain={domain}/>
         <Tooltip/>

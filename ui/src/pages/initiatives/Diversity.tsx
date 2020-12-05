@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Grid, Header} from 'semantic-ui-react';
 import {TimelinePageDB} from "../../DataTypes";
 import InitiativeChart from "./InitiativeChart";
+import InterventionChart from "./InterventionChart";
 
 /**
  * Diversity Initiative:
@@ -21,18 +22,33 @@ type DiversityPageProps = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear, timelinePageDB}) => {
   const graduates = [
-    {name: '2015', women: 37, nativehawaiians: 12},
-    {name: '2016', women: 47, nativehawaiians: 22},
-    {name: '2017', women: 57, nativehawaiians: 42},
-    {name: '2018', women: 67, nativehawaiians: 32},
-    {name: '2019', women: 77, nativehawaiians: 52},
+    {name: '2015', women: 17, nativehawaiians: 12},
+    {name: '2016', women: 24, nativehawaiians: 10},
+    {name: '2017', women: 27, nativehawaiians: 22},
+    {name: '2018', women: 37, nativehawaiians: 24},
+    {name: '2019', women: 40, nativehawaiians: 28},
   ];
   const admitted = [
-    {name: '2015', women: 67, nativehawaiians: 18},
-    {name: '2016', women: 77, nativehawaiians: 22},
-    {name: '2017', women: 57, nativehawaiians: 24},
-    {name: '2018', women: 87, nativehawaiians: 44},
-    {name: '2019', women: 67, nativehawaiians: 33},
+    {name: '2015', women: 21, nativehawaiians: 18},
+    {name: '2016', women: 34, nativehawaiians: 22},
+    {name: '2017', women: 47, nativehawaiians: 24},
+    {name: '2018', women: 45, nativehawaiians: 18},
+    {name: '2019', women: 57, nativehawaiians: 14},
+  ];
+  const exitSurvey = [
+    {name: '2015', women: 1.4, nativehawaiians: 1.8},
+    {name: '2016', women: 1.2, nativehawaiians: 1.2},
+    {name: '2017', women: 1.4, nativehawaiians: 1.5},
+    {name: '2018', women: 2.5, nativehawaiians: 1.8},
+    {name: '2019', women: 3.7, nativehawaiians: 2.4},
+  ];
+
+  const interventions = [
+    {name: '2015', index: 1, value: 10, intervention: 'intervention1'},
+    {name: '2016', index: 2, value: 10, intervention: 'intervention2'},
+    {name: '2017', index: 3, value: 12, intervention: 'intervention3'},
+    {name: '2018', index: 4, value: 13, intervention: 'intervention4'},
+    {name: '2019', index: 5, value: 14, intervention: 'intervention5'},
   ];
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
@@ -42,8 +58,10 @@ const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear,
           this academic unit. </p>
         <Grid>
           <Grid.Row centered>
-            <InitiativeChart title='% Graduates' data={graduates} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>
-            <InitiativeChart title='% Admitted' data={admitted} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>
+            <InitiativeChart title='Graduates (%)' data={graduates} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>
+            <InitiativeChart title='Admitted (%)' data={admitted} domain={[0,100]} dataKey={['women', 'nativehawaiians']}/>
+            <InitiativeChart title='Exit Survey Response: As a woman (Native Hawaiian), I felt supported in this program.' data={exitSurvey} domain={[1,5]} dataKey={['women', 'nativehawaiians']} hideXAxis={false}/>
+            <InterventionChart title='Interventions' data={interventions}/>
           </Grid.Row>
         </Grid>
       </div>
