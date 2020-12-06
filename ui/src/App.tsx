@@ -6,6 +6,7 @@ import AYPage from './pages/academic-year/AYPage';
 import {DashboardDB} from "./DataTypes";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import DiversityPage from "./pages/initiatives/Diversity";
+import ProfessionalPreparationPage from "./pages/initiatives/ProfessionalPreparation";
 
 type AppProps = {
   latestYear: number,
@@ -24,6 +25,9 @@ const App: React.FunctionComponent<AppProps> = ({title, latestYear, dashboardDB}
         <Switch>
           <Route path="/diversity">
             <DiversityPage latestYear={latestYear} timelinePageDB={dashboardDB.timelinePageDB}/>
+          </Route>
+          <Route path="/professional-preparation">
+            <ProfessionalPreparationPage latestYear={latestYear} timelinePageDB={dashboardDB.timelinePageDB}/>
           </Route>
           <Route path="/">
             <AYPage latestYear={latestYear} ayPageDB={dashboardDB.ayPageDB}/>

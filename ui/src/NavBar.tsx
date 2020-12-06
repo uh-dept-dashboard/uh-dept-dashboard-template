@@ -40,6 +40,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = ({title = 'UH Dept Dashboar
         <Dropdown text="Initiatives View">
           <Dropdown.Menu>
             <Dropdown.Item text="Diversity" as={NavLink} exact to="/diversity"/>
+            <Dropdown.Item text="Professional Preparation" as={NavLink} exact to="/professional-preparation"/>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>
