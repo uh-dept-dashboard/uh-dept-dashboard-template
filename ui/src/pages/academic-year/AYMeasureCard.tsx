@@ -4,6 +4,7 @@ import './AYMeasureCards.css';
 import {ChartType } from '../../Theme';
 import {TrendLineSpark, BarSpark, DemographicPieSpark, LabeledBarSpark, PieSpark} from '../../components/spark/SparkCharts';
 import {UnitType} from "../../DataTypes";
+import Drilldown from "./Drilldown";
 
 interface SparkDataSet {
   chartType: ChartType,
@@ -20,7 +21,8 @@ interface AYMeasureCardProps {
   priorDelta?: number,
   nextDelta?: number,
   sparks: Array<SparkDataSet>,
-  unit?: UnitType
+  unit?: UnitType,
+  drilldowns?: any[]
 }
 
 const formatNumber = (num: number) => {
@@ -36,7 +38,7 @@ const formatNumber = (num: number) => {
   return `${(num / 1000000).toPrecision(3)}M`;
 }
 
-const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value, priorDelta, nextDelta, unit, sparks}) => {
+const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, description, year, value, priorDelta, nextDelta, unit, sparks, drilldowns}) => {
   let formattedValue = formatNumber(value);
   if (unit)
     if (unit === UnitType.Percent) {
@@ -78,7 +80,11 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
           { (data.chartType === ChartType.LabeledBarSpark) ? <div style={{paddingTop: '10px'}}><LabeledBarSpark data={data.chartData} /></div> : ''}
         </div>) : ''}
 
+        { drilldowns ? <Card.Description textAlign='center' style={{paddingTop: '20px'}}>Drilldowns</Card.Description> : ''}
+        { drilldowns ? drilldowns.map((entry, index) => <div key={index}><Drilldown name={entry.name} description={entry.description} /></div>) : '' }
+
       </Card.Content>
+
     </Card>
   )
 }
