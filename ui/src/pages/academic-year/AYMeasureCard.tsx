@@ -80,8 +80,8 @@ const AYMeasureCard: React.FunctionComponent<AYMeasureCardProps> = ({name, descr
           { (data.chartType === ChartType.LabeledBarSpark) ? <div style={{paddingTop: '10px'}}><LabeledBarSpark data={data.chartData} /></div> : ''}
         </div>) : ''}
 
-        { drilldowns ? <Card.Description textAlign='center' style={{paddingTop: '20px'}}>Drilldowns</Card.Description> : ''}
-        { drilldowns ? drilldowns.map((entry, index) => <div key={index}><Drilldown name={entry.name} description={entry.description} /></div>) : '' }
+        { drilldowns && drilldowns[0]? <Card.Description textAlign='center' style={{paddingTop: '20px'}}>Drilldowns</Card.Description> : ''}
+        { drilldowns && drilldowns[0]? drilldowns.map((entry, index) => <div key={index}><Drilldown name={entry.name} description={entry.description} /></div>) : '' }
 
       </Card.Content>
 

@@ -85,7 +85,7 @@ interface BreakdownChart {
 }
 
 /**
- * The global data structure containing all Measures and Breakdowns.
+ * The AYPageDB
  *  db = {
  *    SSH: {
  *      name: 'SSH',
@@ -108,6 +108,7 @@ type AYPageDB = {
     description: string,
     trend: MeasureTrend,
     breakdowns: BreakdownChart[]
+    drilldowns?: any[]
   }
 }
 

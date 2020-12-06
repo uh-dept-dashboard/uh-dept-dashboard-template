@@ -15,16 +15,16 @@ function computeDelta(year: number, dashboardDB: AYPageDB, measureType: MeasureT
   return 0;
 }
 
-function makeCardProps(measureType: MeasureType, latestYear: number, year: number, dashboardDB: AYPageDB): AYMeasureCardProps {
+function makeCardProps(measureType: MeasureType, latestYear: number, year: number, ayPageDB: AYPageDB): AYMeasureCardProps {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const measureData = dashboardDB[measureType]!;
+  const measureData = ayPageDB[measureType]!;
   const name = measureData.name;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const value = measureData.trend[year]!.value!;
   const description = measureData.description;
   const unit = measureData.unitType;
-  const priorDelta = computeDelta(year, dashboardDB, measureType, -1);
-  const nextDelta = computeDelta(year, dashboardDB, measureType, 1);
+  const priorDelta = computeDelta(year, ayPageDB, measureType, -1);
+  const nextDelta = computeDelta(year, ayPageDB, measureType, 1);
   const years = [latestYear - 4, latestYear - 3, latestYear - 2, latestYear -1, latestYear];
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const trendData = years.map(year => measureData.trend[`${year}`]!); // convert to ordered list of Measures.
@@ -37,7 +37,8 @@ function makeCardProps(measureType: MeasureType, latestYear: number, year: numbe
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const breakdownSpark = {chartType: breakdownChart.chartType, chartTitle: breakdownChart.chartTitle, chartData: breakdownChart.chartData[year]!};
   const sparks = [fiveYearTrend, breakdownSpark];
-  return { latestYear, name, value, description, unit, year, priorDelta, nextDelta, sparks }
+  const drilldowns: any[] = [];
+  return { latestYear, name, value, description, unit, year, priorDelta, nextDelta, sparks, drilldowns }
 }
 
 export {makeCardProps};

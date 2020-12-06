@@ -8,7 +8,6 @@ interface SparkProps {
 
 function TrendlineSparkTooltip({ payload, active }:any) {
   if (active) {
-    console.log('payload', payload);
     return (
       <div className="custom-tooltip">
         <p className="label">Year: {`${payload[0].payload.year}`}</p>

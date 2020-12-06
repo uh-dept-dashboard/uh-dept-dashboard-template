@@ -5,7 +5,6 @@ import {theme} from '../../Theme';
 
 function InterventionChartTooltip({ payload, active }:any) {
   if (active) {
-    console.log('payload', payload);
     return (
       <div className="custom-tooltip">
         <p className="label">{`${payload && payload[0] && payload[0].payload.intervention}`}</p>

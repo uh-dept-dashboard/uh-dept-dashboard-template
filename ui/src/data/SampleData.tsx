@@ -20,7 +20,8 @@ function makeAYPageDB(): AYPageDB {
     unitType: UnitType.Number,
     description: 'Measures the amount of instruction.',
     trend: makeMeasurementTrend(1000, 3000),
-    breakdowns: makeByFacultyBreakdowns()
+    breakdowns: makeByFacultyBreakdowns(),
+    drilldowns: [{name: 'SSH by Faculty', description: 'foo'}]
   }
   dashboardDB[MeasureType.FACULTYFTE] = {
     name: 'Faculty FTE',
