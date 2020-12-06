@@ -1,6 +1,5 @@
 import React from "react";
 import {Button, Modal} from "semantic-ui-react";
-import { theme } from '../../Theme';
 
 interface DrilldownProps {
   name: string
