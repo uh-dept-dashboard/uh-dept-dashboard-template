@@ -50,7 +50,7 @@ const ProfessionalPreparationPage: React.FunctionComponent<ProfessionalPreparati
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
       <div>
-        <Header as='h2'>Improve Professional Preparation</Header>
+        <Header as='h2'>Initiative: Improve Professional Preparation</Header>
         <p>The goal of the Professional Preparation initiative is to increase the professional preparation of graduates from this academic unit.</p>
         <Grid>
           <Grid.Row centered>

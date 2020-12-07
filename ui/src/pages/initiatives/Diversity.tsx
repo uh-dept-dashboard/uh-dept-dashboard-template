@@ -53,7 +53,7 @@ const DiversityPage: React.FunctionComponent<DiversityPageProps> = ({latestYear,
   return (
     <Container style={{paddingLeft: '10px', paddingRight: '10px'}}>
       <div>
-        <Header as='h2'>Increase Diversity</Header>
+        <Header as='h2'>Initiative: Increase Diversity</Header>
         <p>The goal of the Diversity initiative is to increase both the numbers and percentage of women and Native Hawaiians graduating from this academic unit. </p>
         <Grid>
           <Grid.Row centered>
